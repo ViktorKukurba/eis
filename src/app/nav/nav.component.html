@@ -1,13 +1,13 @@
 <!-- Nav -->
-
-
-<nav id="nav" class="navbar navbar-expand-sm nav-transparent">
-  <a class="navbar-brand" href="/">ЄВРОІНВЕСТСЕРВІС</a>
-  <button class="navbar-toggler collapsed" (click)="toggleNav()" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<nav id="nav" class="navbar navbar-expand-md nav-transparent">
+  <a class="navbar-brand" href="javascript:void(0)">ЄВРОІНВЕСТСЕРВІС</a>
+  <!-- Collapse nav button -->
+  <button class="navbar-toggler nav-collapse" (click)="toggleNav()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span></span>
   </button>
+  <!-- /Collapse nav button -->
 
-  <div class="navbar-collapse collapse navbar-right" id="navbarsExample03" style="">
+  <div class="navbar-collapse collapse navbar-right" id="navbarNavAltMarkup">
     <!--  Main navigation  -->
     <ul class="main-nav nav navbar-nav">
       <li *ngFor="let link of links">
@@ -17,34 +17,4 @@
     <!-- /Main navigation -->
   </div>
 </nav>
-
-
-<!--<nav id="nav" class="navbar nav-transparent">-->
-  <!--<div class="container">-->
-
-    <!--<div class="navbar-header">-->
-      <!--&lt;!&ndash; Logo &ndash;&gt;-->
-      <!--<div class="navbar-brand">-->
-        <!--<a href="index.html">-->
-          <!--<img class="logo" src="img/logo.png" alt="logo">-->
-          <!--<img class="logo-alt" src="img/logo-alt.png" alt="logo">-->
-        <!--</a>-->
-      <!--</div>-->
-      <!--&lt;!&ndash; /Logo &ndash;&gt;-->
-
-      <!--&lt;!&ndash; Collapse nav button &ndash;&gt;-->
-      <!--<div (click)="toggleNav()" class="nav-collapse">-->
-        <!--<span></span>-->
-      <!--</div>-->
-      <!--&lt;!&ndash; /Collapse nav button &ndash;&gt;-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash;  Main navigation  &ndash;&gt;-->
-    <!--<ul class="main-nav nav navbar-nav navbar-right">-->
-      <!--<li *ngFor="let link of links"><a (click)="navigate($event, link)" for="nav" snScrollSpyItem href="#{{link.hash}}">{{link.title}}</a></li>-->
-    <!--</ul>-->
-    <!--&lt;!&ndash; /Main navigation &ndash;&gt;-->
-
-  <!--</div>-->
-<!--</nav>-->
 <!-- /Nav -->
