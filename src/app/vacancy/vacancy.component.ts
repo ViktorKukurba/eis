@@ -60,8 +60,6 @@ export class VacancyComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.vacancy;
-    console.log('prev value: ', name.previousValue, name.previousValue === name.currentValue);
-    console.log('got name: ', name.currentValue);
     if (name.previousValue) {
       this.state = this.state === 'small' ? 'large' : 'small';
     } else {

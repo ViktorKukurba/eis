@@ -9,7 +9,7 @@ import { Utils } from '../shared'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'ТзОВ НВЦ "ЄВРОІНВЕСТСЕРВІС"';
+  title = 'ЄВРОІНВЕСТСЕРВІС';
   subtitle = 'Ми успішно надаємо послуги працевлаштування за будівельними спеціальностями громадянам України, Білорусі та Молдови на території Польші, Литви, Латвії та Німеччини'
   vacanciesLink = 'Пошук вакансій'
   formLink = 'Залишити заявку'

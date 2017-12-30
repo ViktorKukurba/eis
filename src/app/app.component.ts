@@ -34,11 +34,11 @@ export class AppComponent implements OnInit {
     $(window).on('scroll', function() {
       var links = document.querySelectorAll('#nav .main-nav a');
       for (let link of Array.from(links)) {
-        var id = link.getAttribute('ng-reflect-href')
+        var id = link.getAttribute('href');
         if (Utils.isElementOnView(document.querySelector(id))) {
-          link.classList.add('active')
+          link.classList.add('active');
         } else {
-          link.classList.remove('active')
+          link.classList.remove('active');
         }
       }
 

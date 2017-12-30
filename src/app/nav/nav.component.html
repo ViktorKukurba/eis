@@ -3,7 +3,7 @@
 
 <nav id="nav" class="navbar navbar-expand-sm nav-transparent">
   <a class="navbar-brand" href="/">ЄВРОІНВЕСТСЕРВІС</a>
-  <button class="navbar-toggler collapsed" (click)="toggleNav()" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler collapsed" (click)="toggleNav()" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -11,7 +11,7 @@
     <!--  Main navigation  -->
     <ul class="main-nav nav navbar-nav">
       <li *ngFor="let link of links">
-        <a (click)="navigate($event, link)" for="nav" snScrollSpyItem href="#{{link.hash}}">{{link.title}}</a>
+        <a (click)="navigate($event, link)" for="nav" href="#{{link.hash}}">{{link.title}}</a>
       </li>
     </ul>
     <!-- /Main navigation -->
