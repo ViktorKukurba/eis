@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@angular/cli": "^1.2.4",
-    "@angular/compiler-cli": "5.1.1",
+    "@angular/compiler-cli": "^5.1.1",
     "@angular/animations": "^5.1.1",
     "@angular/common": "^5.1.1",
     "@angular/compiler": "^5.1.1",
@@ -27,7 +27,7 @@
     "@angular/router": "^5.1.1",
     "@thisissoon/angular-inviewport": "^1.4.2",
     "@thisissoon/angular-scrollspy": "^1.2.1",
-    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap": "4.0.0-beta.2",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
