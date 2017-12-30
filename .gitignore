@@ -36,3 +36,5 @@ Thumbs.db
 package-lock.json
 
 /src/environments/environment.ts
+
+/creative-agency

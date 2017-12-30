@@ -1,0 +1,86 @@
+@import "../app.vars.scss";
+/*------------------------------------*\
+	Vacancy
+\*------------------------------------*/
+
+#vacancy-details .container {
+  padding-top: 4em;
+  overflow: hidden;
+}
+
+.vacancy-info-block {
+  margin: 0;
+  i {
+    float: left;
+    padding: 3px;
+    color: $--color;
+  }
+
+  p {
+    margin: 0;
+    span {
+      color: black;
+    }
+  }
+}
+
+/*------------------------------------*\
+	Owl theme
+\*------------------------------------*/
+
+/* -- dots -- */
+
+::ng-deep .owl-theme {
+  .owl-dots .owl-dot span {
+    border: none;
+    background: #EEE;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+  .owl-dots .owl-dot:hover span {
+    background: $--color;
+  }
+  .owl-dots .owl-dot.active span {
+    background: $--color;
+    width:20px;
+  }
+
+  /* -- nav -- */
+  .owl-nav {
+    opacity: 0;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+
+    [class*='owl-'] {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      background: $--color;
+      color: #FFF;
+      padding: 0px;
+      width: 50px;
+      height: 50px;
+      border-radius:3px;
+      line-height: 50px;
+      margin: 0;
+    }
+
+    [class*='owl-']:hover {
+      opacity: 0.8;
+      background: $--color;
+    }
+  }
+  .owl-prev {
+    left: 0px;
+  }
+
+  .owl-next {
+    right: 0px;
+  }
+}
+
+::ng-deep .owl-theme:hover .owl-nav {
+  opacity: 1;
+}

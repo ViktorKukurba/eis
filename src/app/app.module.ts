@@ -3,22 +3,52 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { OwlModule } from 'ngx-owl-carousel';
+
 import { AppComponent } from './app.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { Wpng2RoutingModule } from './app-routing.module';
 import { PostSingleComponent } from './posts/post-single/post-single.component';
+import { NavComponent } from './nav/nav.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
+import { ScrollSpyModule } from '@thisissoon/angular-scrollspy';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { VacanciesComponent } from './vacancies/vacancies.component';
+import { ContactComponent } from './contact/contact.component';
+import { VacancyComponent } from './vacancy/vacancy.component';
+
+
+// Provide window object for browser and a suitable replacement
+// on other platforms
+const getWindow = () => window;
+const providers = [
+  { provide: WindowRef, useFactory: (getWindow) },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
-    PostSingleComponent
+    PostSingleComponent,
+    NavComponent,
+    HomeComponent,
+    AboutComponent,
+    VacanciesComponent,
+    ContactComponent,
+    VacancyComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    Wpng2RoutingModule
+    Wpng2RoutingModule,
+    InViewportModule.forRoot(providers),
+    ScrollSpyModule.forRoot(),
+    OwlModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

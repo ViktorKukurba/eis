@@ -1,0 +1,31 @@
+<!-- Header -->
+<div id="home">
+  <!-- Background Image -->
+  <div class="bg-img" style="background-image: url('assets/img/background.jpg');">
+    <div class="overlay"></div>
+  </div>
+  <!-- /Background Image -->
+
+  <app-nav></app-nav>
+
+  <!-- home wrapper -->
+  <div class="home-wrapper">
+    <div class="container">
+      <div class="row justify-content-center">
+
+        <!-- home content -->
+        <div class="col-md-10">
+          <div class="home-content">
+            <h1 class="white-text">{{title}}</h1>
+            <p class="white-text">{{subtitle}}</p>
+            <button (click)="navigateTo('vacancies')" class="white-btn">{{vacanciesLink}}</button>
+            <button (click)="navigateTo('request-form')" class="main-btn">{{formLink}}</button>
+          </div>
+        </div>
+        <!-- /home content -->
+      </div>
+    </div>
+  </div>
+  <!-- /home wrapper -->
+
+</div>

@@ -1,0 +1,71 @@
+@import "../app.vars.scss";
+
+.section {
+  p {
+    text-align: justify;
+  }
+
+  ul {
+    text-align: left;
+    column-count: 2;
+    li {
+      padding-left: 1em;
+    }
+  }
+}
+
+/*------------------------------------*\
+	About
+\*------------------------------------*/
+
+.about {
+  position: relative;
+  text-align: center;
+  padding: 40px 20px;
+  border: 1px solid #EEE;
+  margin: 15px 0px;
+  height: 100%;
+}
+
+.about i {
+  font-size: 36px;
+  color: $--color;
+  margin-bottom: 20px;
+}
+
+.about:after {
+  content: "";
+  background-color: $--background-hover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  z-index: -1;
+  -webkit-transition: 0.2s width;
+  transition: 0.2s width;
+}
+
+.about:hover:after {
+  width: 100%;
+}
+
+.about h3 {
+  -webkit-transition: 0.2s color;
+  transition: 0.2s color;
+}
+
+.about:hover h3 {
+  color: #fff;
+}
+
+@media only screen and (min-width : 768px) {
+  .is-table-row {
+    display: table;
+  }
+  .is-table-row [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+  }
+}

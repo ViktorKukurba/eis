@@ -1,0 +1,68 @@
+<!-- Vacancy -->
+<div id="vacancy-details">
+  <!-- Container -->
+  <div class="container" [@myAwesomeAnimation]='state'>
+
+    <!-- Row -->
+    <div class="row" *ngIf="activeVacancy">
+      <!-- Vacancy slider -->
+      <div class="col-md-6">
+        <div class="section-header text-center">
+          <h3 class="title">{{activeVacancy.name}}</h3>
+        </div>
+        <owl-carousel [options]="options" [items]="activeVacancy.images" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+          <img *ngFor="let image of activeVacancy.images;let i = index" class="img-responsive" [src]=image alt="">
+        </owl-carousel>
+      </div>
+      <!-- /Vacancy slider -->
+      <div class="col-md-6">
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>МІСЦЕ РОЗТАШУВАННЯ:</span> {{activeVacancy.place}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>СТАТЬ:</span> {{activeVacancy.sex}} <span> ВІК:</span> {{activeVacancy.age}}</p>
+        </div>
+        <!--<div class="vacancy-info-block">-->
+          <!--<i class="fa fa-check"></i>-->
+          <!--<p>-->
+        <!--</div>-->
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>КВАЛІФІКАЦІЯ:</span> {{activeVacancy.experience}}, {{activeVacancy.language}}, {{activeVacancy.additional}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>ОБОВ'ЯЗКИ:</span> {{activeVacancy.duties.join(', ')}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>РОБОЧИЙ ГРАФІК:</span> {{activeVacancy.schedule.join(', ')}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>ЗАРПЛАТА:</span> {{activeVacancy.payment}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>РОБОЧІ УМОВИ:</span> {{activeVacancy.conditions.join(', ')}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>УМОВИ ПРАЦЕВЛАШТУВАННЯ:</span> {{activeVacancy.employment.join(', ')}}</p>
+        </div>
+        <div class="vacancy-info-block">
+          <i class="fa fa-check"></i>
+          <p><span>УМОВИ ПРОЖИВАННЯ:</span> {{activeVacancy.residence.join(', ')}}</p>
+        </div>
+      </div>
+      <!-- /Vacancy -->
+    </div>
+    <!-- /Row -->
+
+  </div>
+  <!-- /Container -->
+
+</div>
+<!-- /Why Choose Us -->
