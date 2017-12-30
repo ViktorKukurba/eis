@@ -13,6 +13,8 @@
     "postinstall": "ng build --aot --target=production"
   },
   "dependencies": {
+    "@angular/cli": "^1.2.4",
+    "@angular/compiler-cli": "^5.1.1",
     "@angular/animations": "^5.1.1",
     "@angular/common": "^5.1.1",
     "@angular/compiler": "^5.1.1",
@@ -36,8 +38,6 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "^1.2.4",
-    "@angular/compiler-cli": "^5.1.1",
     "@types/jasmine": "2.5.53",
     "@types/jquery": "^3.2.17",
     "@types/node": "~8.0.16",
