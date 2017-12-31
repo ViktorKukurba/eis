@@ -25,6 +25,7 @@
   border: none;
   border-radius: 0;
   margin-bottom: 0px;
+  padding: 0 .5em;
 }
 
 #nav.fixed-nav {
@@ -47,7 +48,7 @@
     padding: 0px 15px;
   }
   .main-nav li a {
-    font-size: 14px;
+    font-size: 16px;
     -webkit-transition: 0.2s color;
     transition: 0.2s color;
   }

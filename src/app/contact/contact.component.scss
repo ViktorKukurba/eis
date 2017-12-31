@@ -36,8 +36,13 @@ h3.request {
 }
 
 .contact-form {
+  overflow: hidden;
+}
+
+.contact-form > form {
   text-align: center;
   margin-top: 40px;
+  padding: 0 1em;
 }
 
 .contact-form .input {
@@ -51,4 +56,8 @@ h3.request {
 
 .contact-form .input:nth-child(2) {
   margin-left: 15px;
+}
+
+.btn-group {
+  margin-bottom: 1rem;
 }

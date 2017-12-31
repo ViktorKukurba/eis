@@ -2,35 +2,40 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations'
 declare var $ :any;
 
+var refreshAnimation = animate('700ms ease-in',
+    keyframes([
+      style({'height': '0',    offset: 0.4}),
+      style({'height': '0',    offset: 0.6}),
+      style({offset: 1.0})
+    ])
+)
+
 @Component({
   selector: 'app-vacancy',
   templateUrl: './vacancy.component.html',
   styleUrls: ['./vacancy.component.scss'],
   animations: [
     trigger('myAwesomeAnimation', [
-      state('small', style({
-        // transform: 'scale(1)',
-         // 'max-height': '100%'
+      state('refresh', style({})),
+      state('close', style({
+        'max-height': '0'
       })),
-      state('large', style({
-        // transform: 'scale(1)',
-        // 'max-height': '100%'
+      state('open', style({
+        'max-height': '100%',
       })),
-      transition('* => *', animate('700ms ease-in',
+      transition('open => refresh', refreshAnimation),
+      transition('refresh => open', refreshAnimation),
+      transition('close => open', animate('500ms ease-in',
           keyframes([
-            style({
-              // 'max-height': '100%',
-              offset: 0
-            }),
-            style({'height': '0',    offset: 0.4}),
-            style({'height': '0',    offset: 0.6}),
-            style({offset: 1.0})
+            style({'max-height': '0em', offset: 0}),
+            style({'max-height': '20em', offset: 0.5}),
+            style({'max-height': '100%', offset: 1.0})
           ])
       )),
-      transition('* => open', animate('500ms ease-in',
+      transition('* => close', animate('500ms ease-in',
           keyframes([
-            style({'height': '0',    offset: 0}),
-            style({offset: 1.0, 'max-height': '100%'})
+            style({'height': '0', offset: 0.5}),
+            style({'height': '0', offset: 1.0})
           ])
       )),
     ]),
@@ -45,7 +50,7 @@ export class VacancyComponent implements OnInit, OnChanges {
   private options:Object = {
     items:1,
     loop:true,
-    margin:15,
+    margin:10,
     nav: true,
     navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
     dots : true,
@@ -61,17 +66,17 @@ export class VacancyComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.vacancy;
     if (name.previousValue) {
-      this.state = this.state === 'small' ? 'large' : 'small';
-    } else {
+      this.state = this.state === 'refresh' ? 'open' : 'refresh';
+      setTimeout(() => {
+        this.activeVacancy = name.currentValue
+      }, 4e2)
+    } else if (name.currentValue) {
+      this.activeVacancy = name.currentValue
       this.state = 'open'
     }
-
-    setTimeout(() => {
-      this.activeVacancy = name.currentValue
-    }, 4e2)
   }
 
-  state:String = 'small';
+  state:String = 'close';
 
   ngOnInit() {
     // Owl Carousel

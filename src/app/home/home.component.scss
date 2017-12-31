@@ -48,3 +48,9 @@ header {
 .breadcrumb>li+li:before {
   color: $--color-text;
 }
+
+@media only screen and (max-width: 767px) {
+  .home-content h1 {
+    font-size:32px;
+  }
+}

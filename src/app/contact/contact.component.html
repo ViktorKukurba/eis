@@ -11,27 +11,15 @@
     <!-- Row -->
     <div class="row">
       <!-- contact -->
-      <div class="col-md-4">
+      <div *ngFor="let contact of contacts" class="col-md-4">
         <div class="contact">
-          <div><h4>Україна, м.Вінниця</h4></div>
-          <div><i class="fa fa-map-marker"></i>вул. Козицького, 15, офіс 101</div>
-          <div><i class="fa fa-phone"></i>+38 098 449 2139<i class="viber"></i></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="contact">
-          <div><h4>Україна, м.Львів</h4></div>
-          <div><i class="fa fa-map-marker"></i>вул. Миколайчука, 24, офіс 1</div>
-          <div><i class="fa fa-phone"></i>+ 38 095 786 7314</div>
-          <div><i class="fa fa-phone"></i>+ 38 067 706 4788<i class="viber"></i></div>
-          <div><i class="fa fa-phone"></i>+ 38 097 431 3705<i class="viber"></i></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="contact">
-          <div><h4>Lithuania, Vilnius</h4></div>
-          <div><i class="fa fa-map-marker"></i>08223,  Verkiu g. 30B</div>
-          <div><i class="fa fa-phone"></i>+ 37 067 153 640<i class="viber"></i></div>
+          <div><h4>{{contact.city}}</h4></div>
+          <div><i class="fa fa-map-marker"></i>{{contact.address}}</div>
+          <div *ngFor="let phone of contact.phones">
+            <a [href]="'tel:' + phone.number">
+              <i class="fa fa-phone"></i>{{phone.number}}<i *ngIf="phone.viber" class="viber"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -49,16 +37,23 @@
 
     <!-- contact form -->
       <div class="row justify-content-center sm-padding" id="request-form">
-        <div class="section-header text-center col-md-8">
-          <h2 class="title">Залишити заявку/запитання</h2>
-        </div>
-        <div class="col-md-8">
-          <form class="contact-form">
-            <input type="text" class="input" placeholder="Імя">
-            <input type="email" class="input" placeholder="Електронна пошта">
-            <textarea class="input" placeholder="Про себе"></textarea>
-            <button class="main-btn">Надіслати</button>
-          </form>
+        <div class="section-header text-center col-md-12">
+          <h2 class="title">Оформити заявку</h2>
+          <p>Залишити заявку можна завантаживши скан/фото заповненої анкети:</p>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn outline-btn">Скачати анкету</button>
+            <button type="button" class="btn main-btn">Завантажити анкету</button>
+          </div>
+          <p>або заповнивши онлайн форму</p>
+          <button type="button" (click)="formActive = !formActive" class="btn main-btn">Онлайн форма</button>
+          <div class="col-md-8" [@myAwesomeAnimation]='formState' class="contact-form">
+            <form>
+              <input type="text" class="input" placeholder="Імя">
+              <input type="email" class="input" placeholder="Електронна пошта">
+              <textarea class="input" placeholder="Про себе"></textarea>
+              <button class="main-btn">Надіслати</button>
+            </form>
+          </div>
         </div>
       </div>
     <!-- /contact form -->

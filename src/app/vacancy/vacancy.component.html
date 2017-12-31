@@ -7,10 +7,10 @@
     <div class="row" *ngIf="activeVacancy">
       <!-- Vacancy slider -->
       <div class="col-md-6">
-        <div class="section-header text-center">
+        <div class="section-header">
           <h3 class="title">{{activeVacancy.name}}</h3>
         </div>
-        <owl-carousel [options]="options" [items]="activeVacancy.images" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+        <owl-carousel *ngIf="activeVacancy" [options]="options" [items]="activeVacancy.images" [carouselClasses]="['owl-theme', 'row', 'sliding']">
           <img *ngFor="let image of activeVacancy.images;let i = index" class="img-responsive" [src]=image alt="">
         </owl-carousel>
       </div>
@@ -34,11 +34,11 @@
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>ОБОВ'ЯЗКИ:</span> {{activeVacancy.duties.join(', ')}}</p>
+          <p><span>ОБОВ'ЯЗКИ:</span> {{(activeVacancy.duties)?.join(', ')}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>РОБОЧИЙ ГРАФІК:</span> {{activeVacancy.schedule.join(', ')}}</p>
+          <p><span>РОБОЧИЙ ГРАФІК:</span> {{(activeVacancy.schedule)?.join(', ')}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
@@ -46,15 +46,15 @@
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>РОБОЧІ УМОВИ:</span> {{activeVacancy.conditions.join(', ')}}</p>
+          <p><span>РОБОЧІ УМОВИ:</span> {{(activeVacancy.conditions)?.join(', ')}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>УМОВИ ПРАЦЕВЛАШТУВАННЯ:</span> {{activeVacancy.employment.join(', ')}}</p>
+          <p><span>УМОВИ ПРАЦЕВЛАШТУВАННЯ:</span> {{(activeVacancy.employment)?.join(', ')}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>УМОВИ ПРОЖИВАННЯ:</span> {{activeVacancy.residence.join(', ')}}</p>
+          <p><span>УМОВИ ПРОЖИВАННЯ:</span> {{(activeVacancy.residence)?.join(', ')}}</p>
         </div>
       </div>
       <!-- /Vacancy -->
