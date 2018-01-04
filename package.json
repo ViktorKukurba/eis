@@ -10,9 +10,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --target=production"
+    "postinstall": "ng build --aot --target=production",
+    "build_to_wp": "ng build --prod --deploy-url=\"wp-content/themes/invest/dist/\""
   },
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.1.1",
     "@angular/cli": "^1.6.3",
     "@angular/common": "^5.1.1",

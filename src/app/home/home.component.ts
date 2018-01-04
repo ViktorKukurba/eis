@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
+import { ContactService } from '../contact/contact.service'
 import { Utils } from '../shared'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [ContactService]
 })
 export class HomeComponent implements OnInit {
   title = 'ЄВРОІНВЕСТСЕРВІС';
@@ -14,13 +15,25 @@ export class HomeComponent implements OnInit {
   vacanciesLink = 'Пошук вакансій'
   formLink = 'Залишити заявку'
 
-  constructor(private location: Location) {}
+  contacts:Array<Object>;
+
+  // constructor() {}
+  constructor(private contactService: ContactService) {}
 
   navigateTo(link) {
     Utils.scrollTo(link)
   }
 
   ngOnInit() {
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contacts = contacts.map(({city, phones}) => {
+        console.log(phones)
+        return {
+          city,
+          phone: phones[0].number
+        }
+      });
+    })
   }
 
 }

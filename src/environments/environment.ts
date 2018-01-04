@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  wpBase: 'http://chad.wp.org/wp-json/wp/v2/'
+  wpBase: 'http://chad.wp.org/wp-json/wp/v2/',
+  wpSite: 'http://chad.wp.org/'
 };

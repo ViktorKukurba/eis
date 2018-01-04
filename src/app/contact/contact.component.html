@@ -14,7 +14,8 @@
       <div *ngFor="let contact of contacts" class="col-md-4">
         <div class="contact">
           <div><h4>{{contact.city}}</h4></div>
-          <div><i class="fa fa-map-marker"></i>{{contact.address}}</div>
+          <div>{{contact.address}}</div>
+          <a href="javascript:void(0)" (click)="selectAddress(contact)"><i class="fa fa-map-marker"></i>Показати на карті</a>
           <div *ngFor="let phone of contact.phones">
             <a [href]="'tel:' + phone.number">
               <i class="fa fa-phone"></i>{{phone.number}}<i *ngIf="phone.viber" class="viber"></i>
@@ -24,7 +25,11 @@
       </div>
     </div>
     <!-- /Row -->
-
+    <div class="row map-container" [@showMap]="mapState">
+      <agm-map *ngIf="selectedContact" class="col-12" [zoom]="17" [latitude]="selectedContact.lat" [longitude]="selectedContact.lng">
+        <agm-marker [latitude]="selectedContact.lat" [longitude]="selectedContact.lng"></agm-marker>
+      </agm-map>
+    </div>
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="contact">
@@ -39,20 +44,20 @@
       <div class="row justify-content-center sm-padding" id="request-form">
         <div class="section-header text-center col-md-12">
           <h2 class="title">Оформити заявку</h2>
-          <p>Залишити заявку можна завантаживши скан/фото заповненої анкети:</p>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn outline-btn">Скачати анкету</button>
-            <button type="button" class="btn main-btn">Завантажити анкету</button>
-          </div>
-          <p>або заповнивши онлайн форму</p>
+          <p>Заповніть онлайн форму та наші працівники Вам перетелефонують:</p>
           <button type="button" (click)="formActive = !formActive" class="btn main-btn">Онлайн форма</button>
           <div class="col-md-8" [@myAwesomeAnimation]='formState' class="contact-form">
             <form>
               <input type="text" class="input" placeholder="Імя">
               <input type="email" class="input" placeholder="Електронна пошта">
               <textarea class="input" placeholder="Про себе"></textarea>
-              <button class="main-btn">Надіслати</button>
+              <button type="submit" (click)="sendForm()" class="main-btn">Надіслати</button>
             </form>
+          </div>
+          <p>Відправити скан/фото заповненої анкети:</p>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a target="_blank" href="/assets/Anketa-EIS.pdf" download="Anketa-EIS.pdf" class="btn outline-btn">Скачати анкету</a>
+            <button type="button" class="btn main-btn">Завантажити анкету</button>
           </div>
         </div>
       </div>

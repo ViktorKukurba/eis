@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations'
+import { Vacancy } from '../vacancy/vacancy'
 declare var $ :any;
 
 var refreshAnimation = animate('700ms ease-in',
@@ -44,8 +45,8 @@ var refreshAnimation = animate('700ms ease-in',
 export class VacancyComponent implements OnInit, OnChanges {
 
   @Input()
-  vacancy:Object;
-  activeVacancy:Object;
+  vacancy:Vacancy;
+  activeVacancy:Vacancy;
 
   private options:Object = {
     items:1,
@@ -58,7 +59,6 @@ export class VacancyComponent implements OnInit, OnChanges {
     animateOut: 'fadeOut'
   }
 
-  images = ['../../assets/img/about1.jpg', '../../assets/img/monolit.jpg']
   constructor() {
 
   }
@@ -76,7 +76,7 @@ export class VacancyComponent implements OnInit, OnChanges {
     }
   }
 
-  state:String = 'close';
+  state:string = 'close';
 
   ngOnInit() {
     // Owl Carousel

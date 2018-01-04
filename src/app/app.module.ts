@@ -19,6 +19,7 @@ import { AboutComponent } from './about/about.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { ContactComponent } from './contact/contact.component';
 import { VacancyComponent } from './vacancy/vacancy.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 // Provide window object for browser and a suitable replacement
@@ -48,7 +49,10 @@ const providers = [
     InViewportModule.forRoot(providers),
     ScrollSpyModule.forRoot(),
     OwlModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCfDuzk8cLBCL4z3lqmb6oA6e5P4VSnY0I'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,7 +18,7 @@ h3.request {
 }
 
 .contact i.viber {
-  font-size: 36px;
+  font-size: 2em;
   width: 1em;
   color: $--color;
   text-align: center;
@@ -60,4 +60,18 @@ h3.request {
 
 .btn-group {
   margin-bottom: 1rem;
+}
+
+p {
+  margin-top: 1rem;
+}
+
+agm-map {
+  height: 400px;
+  padding: 0;
+}
+
+.map-container {
+  overflow: hidden;
+  background: rgba(134, 143, 155, .5);
 }
