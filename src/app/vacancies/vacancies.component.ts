@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VacanciesService } from './vacancies.service'
 import { Vacancy } from '../vacancy/vacancy'
+import { AppService } from '../app.service'
 
 import { Utils } from '../shared'
 
@@ -16,20 +17,28 @@ export class VacanciesComponent implements OnInit {
 
   active:Object;
 
-  constructor(private vacanciesService: VacanciesService) { }
+  constructor(private vacanciesService: VacanciesService, private appService:AppService) { }
 
   vacancyDetails(vacancy) {
     this.active = vacancy;
     setTimeout(() => {
-      Utils.scrollTo('vacancy-details', -250)
-      // Utils.scrollTo('vacancies-list', -50)
+      if (Utils.isMobile()) {
+        Utils.scrollTo('vacancy-details');
+      } else {
+        Utils.scrollTo('vacancies');
+      }
     }, 1e1)
   }
 
   ngOnInit() {
     this.vacanciesService.getVacancies().subscribe(vacancies => {
       this.vacancies = vacancies
-    })
+    });
+    this.appService.activeSection.subscribe(section => {
+      if (!['#vacancies', '#contact'].includes(section)) {
+        this.active = undefined;
+      }
+    });
   }
 
 }

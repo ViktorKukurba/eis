@@ -33,6 +33,7 @@
     "core-js": "^2.4.1",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
+    "mobile-detect": "^1.4.1",
     "ngx-bootstrap": "^2.0.0-rc.0",
     "ngx-owl-carousel": "^2.0.4",
     "popper.js": "^1.12.9",

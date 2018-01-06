@@ -47,7 +47,7 @@
   }
   .owl-dots .owl-dot.active span {
     background: $--color;
-    width:20px;
+    width:1em;
   }
 
   /* -- nav -- */
@@ -62,7 +62,8 @@
       -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
-      background: $--color;
+      background: transparent;
+      //background: $--color;
       color: #FFF;
       padding: 0px;
       width: 50px;
@@ -70,19 +71,21 @@
       border-radius:3px;
       line-height: 50px;
       margin: 0;
+      font-size: 3em;
     }
 
     [class*='owl-']:hover {
       opacity: 0.8;
-      background: $--color;
+      background: transparent;
+      //background: $--color;
     }
   }
   .owl-prev {
-    left: 0px;
+    left: 0;
   }
 
   .owl-next {
-    right: 0px;
+    right: 0;
   }
 }
 

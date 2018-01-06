@@ -12,14 +12,16 @@
     <div class="row">
       <!-- contact -->
       <div *ngFor="let contact of contacts" class="col-md-4">
-        <div class="contact">
+        <div class="contact" [ngClass]="{active: selectedContact && contact.city === selectedContact.city}">
           <div><h4>{{contact.city}}</h4></div>
           <div>{{contact.address}}</div>
           <a href="javascript:void(0)" (click)="selectAddress(contact)"><i class="fa fa-map-marker"></i>Показати на карті</a>
-          <div *ngFor="let phone of contact.phones">
-            <a [href]="'tel:' + phone.number">
-              <i class="fa fa-phone"></i>{{phone.number}}<i *ngIf="phone.viber" class="viber"></i>
-            </a>
+          <div class="phones">
+            <div *ngFor="let phone of contact.phones">
+              <a [href]="'tel:' + phone.number">
+                <i class="fa fa-phone"></i>{{phone.number}}<i *ngIf="phone.viber" class="viber"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>

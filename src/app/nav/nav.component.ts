@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
+import { AppService } from '../app.service';
 import { Utils } from '../shared'
 
 @Component({
@@ -14,7 +15,10 @@ export class NavComponent implements OnInit {
     { title: 'Контакти', hash: 'contact' }
   ];
 
-  constructor() { }
+  activeSection:string;
+  fixedNav: boolean;
+
+  constructor(private appService:AppService) { }
 
   ngOnInit() {
     ///////////////////////////
@@ -22,12 +26,20 @@ export class NavComponent implements OnInit {
     $('.has-dropdown a').on('click', function() {
       $(this).parent().toggleClass('open-drop');
     });
+
+    this.appService.windowScroll.subscribe(position => {
+      this.fixedNav = position > 1
+    });
+
+    this.appService.activeSection.subscribe(section => {
+      this.activeSection = section ? section.replace('#', '') : section;
+    });
   }
 
   // Smooth scroll
   navigate(event, link) {
     event.preventDefault();
-    Utils.scrollTo(link.hash)
+    Utils.scrollTo(link.hash);
   }
 
   toggleNav() {

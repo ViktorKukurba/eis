@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { ContactComponent } from './contact/contact.component';
+import { ContactService } from './contact/contact.service';
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { AgmCoreModule } from '@agm/core';
 
@@ -54,7 +55,7 @@ const providers = [
       apiKey: 'AIzaSyCfDuzk8cLBCL4z3lqmb6oA6e5P4VSnY0I'
     })
   ],
-  providers: [],
+  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

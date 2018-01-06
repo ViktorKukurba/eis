@@ -28,9 +28,9 @@
   </div>
   <!-- /home wrapper -->
   <div class="row contacts">
-    <div class="col-md-4" *ngFor="let contact of contacts">
-      <p>{{contact.city}}</p>
-      <p>{{contact.phone}}</p>
+    <div class="col-sm-4" *ngFor="let contact of contacts">
+      <a (click)="selectContact(contact.contact)"><i class="fa fa-map-marker"></i>{{contact.city}}</a>
+      <a [href]="'tel:' + contact.phone"><i class="fa fa-mobile-phone"></i>{{contact.phone}}</a>
     </div>
   </div>
 </div>

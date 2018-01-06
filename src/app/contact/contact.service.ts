@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../environments/environment';
 import { Contact } from './contact'
 
@@ -12,7 +13,12 @@ export class ContactService {
   private CONTACT_POST_URL = this._wpSite + 'wp-admin/admin-ajax.php?action=send_message';
   private CONTACTS_URL = '/assets/data/contacts.json';
 
-  constructor(public http:HttpClient) { }
+  private activeContact_ = new BehaviorSubject<Contact>(undefined);
+
+  activeContact = this.activeContact_.asObservable();
+
+  constructor(public http: HttpClient) {
+  }
 
   sendEmail(message: string): Observable<any> {
     console.log(this._wpSite + `wp-admin/admin-ajax.php`)
@@ -21,8 +27,14 @@ export class ContactService {
     return this.http.post(this.CONTACT_POST_URL, formData);
   }
 
-  getContacts():Observable<Contact[]> {
+  getContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(this.CONTACTS_URL);
+  }
+
+  setActiveContact(contact) {
+    if (contact !== this.activeContact_.value) {
+      this.activeContact_.next(contact);
+    }
   }
 
 }

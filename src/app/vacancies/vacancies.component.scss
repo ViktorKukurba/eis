@@ -42,7 +42,7 @@
 
 .vacancy-item:after {
   content: "";
-  background-color: #1C1D21;
+  background-color: $--background-hover;
   position: absolute;
   left: 0;
   top: 0;
@@ -57,13 +57,18 @@
   width: 100%;
 }
 
-.vacancy-item:hover h5 {
-  color: #fff;
+.vacancy-item:hover {
+  i, a {
+    color: $--color-text-hover;
+  }
+  h5 {
+    color: #fff;
+  }
 }
 
 .animate-if {
   background:white;
-  border:1px solid black;
+  border:1px solid $--background-hover;
   padding:10px;
 }
 

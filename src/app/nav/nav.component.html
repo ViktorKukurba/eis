@@ -1,5 +1,5 @@
 <!-- Nav -->
-<nav id="nav" class="navbar navbar-expand-md nav-transparent">
+<nav id="nav" class="navbar navbar-expand-md nav-transparent" [ngClass]="{'fixed-nav': fixedNav}">
   <a class="navbar-brand" href="javascript:void(0)">ЄВРОІНВЕСТСЕРВІС</a>
   <!-- Collapse nav button -->
   <button class="navbar-toggler nav-collapse" (click)="toggleNav()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
   <div class="navbar-collapse collapse navbar-right" id="navbarNavAltMarkup">
     <!--  Main navigation  -->
     <ul class="main-nav nav navbar-nav">
-      <li *ngFor="let link of links">
+      <li *ngFor="let link of links" [ngClass]="{active: link.hash === activeSection}">
         <a (click)="navigate($event, link)" for="nav" href="#{{link.hash}}">{{link.title}}</a>
       </li>
     </ul>

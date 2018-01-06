@@ -1,6 +1,8 @@
 import * as $ from 'jquery'
+import * as MobileDetect from "mobile-detect";
 
 export class Utils {
+    private static md:MobileDetect = new MobileDetect(window.navigator.userAgent);
     static scrollTo(link, offset = 0) {
         $('html, body').animate({
             scrollTop: $(`#${link}`).offset().top + offset
@@ -18,5 +20,9 @@ export class Utils {
         var elementBottom = top + element.offsetHeight > pageTop + offset;
 
         return elementTop && elementBottom
+    }
+
+    static isMobile() {
+        return this.md.mobile();
     }
 }

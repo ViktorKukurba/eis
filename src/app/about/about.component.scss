@@ -25,38 +25,42 @@
   border: 1px solid #EEE;
   margin: 15px 0px;
   height: 100%;
+
+  i {
+    font-size: 36px;
+    color: $--color;
+    margin-bottom: 20px;
+  }
+
+  :after {
+    content: "";
+    background-color: $--background-hover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    z-index: -1;
+    -webkit-transition: 0.2s width;
+    transition: 0.2s width;
+  }
+
+  h3 {
+    -webkit-transition: 0.2s color;
+    transition: 0.2s color;
+  }
 }
 
-.about i {
-  font-size: 36px;
-  color: $--color;
-  margin-bottom: 20px;
-}
-
-.about:after {
-  content: "";
-  background-color: $--background-hover;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0%;
-  z-index: -1;
-  -webkit-transition: 0.2s width;
-  transition: 0.2s width;
-}
-
-.about:hover:after {
-  width: 100%;
-}
-
-.about h3 {
-  -webkit-transition: 0.2s color;
-  transition: 0.2s color;
-}
-
-.about:hover h3 {
-  color: #fff;
+.about:hover {
+  i {
+    color: $--color-text-hover;
+  }
+  h3 {
+    color: #fff;
+  }
+  :after {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width : 768px) {

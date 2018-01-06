@@ -10,24 +10,40 @@ header {
 
 #home {
   height: 100vh;
+
+  .contacts a {
+    color: white;
+    vertical-align: top;
+    display: block;
+    cursor: pointer;
+    i {
+      color: $--color-text-hover;
+      //color: $--color;
+      margin-right: .5em;
+      font-size: 1.5em;
+    }
+  }
+
+  .home-wrapper {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
+  }
 }
 
-#home .home-wrapper {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  text-align: center;
-}
+.home-content {
+  button {
+    margin-top: 20px;
+  }
 
-.home-content h1 {
-  text-transform: uppercase;
-}
-.home-content button {
-  margin-top: 20px;
+  h1 {
+    text-transform: uppercase;
+  }
 }
 
 .header-wrapper h2 {
@@ -65,5 +81,20 @@ header {
 @media only screen and (max-width: 767px) {
   .home-content h1 {
     font-size:32px;
+  }
+
+  .home-content button {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  #home {
+    .home-wrapper {
+      top: 40%;
+    }
+  }
+  .home-content h1 {
+    font-size:28px;
   }
 }

@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations'
 import { Vacancy } from '../vacancy/vacancy'
+import {Utils} from "../shared/index";
 declare var $ :any;
 
 var refreshAnimation = animate('700ms ease-in',
     keyframes([
-      style({'height': '0',    offset: 0.4}),
-      style({'height': '0',    offset: 0.6}),
+      style({'height': '0', offset: 0.4}),
+      style({'height': '0', offset: 0.6}),
       style({offset: 1.0})
     ])
 )
@@ -33,7 +34,7 @@ var refreshAnimation = animate('700ms ease-in',
             style({'max-height': '100%', offset: 1.0})
           ])
       )),
-      transition('* => close', animate('500ms ease-in',
+      transition('* => close', animate('500ms ease-out',
           keyframes([
             style({'height': '0', offset: 0.5}),
             style({'height': '0', offset: 1.0})
@@ -42,7 +43,7 @@ var refreshAnimation = animate('700ms ease-in',
     ]),
   ]
 })
-export class VacancyComponent implements OnInit, OnChanges {
+export class VacancyComponent implements OnChanges {
 
   @Input()
   vacancy:Vacancy;
@@ -65,8 +66,16 @@ export class VacancyComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.vacancy;
-    if (name.previousValue) {
-      this.state = this.state === 'refresh' ? 'open' : 'refresh';
+    if (!name.currentValue) {
+      console.log('close-vacancy');
+      this.state = 'close'
+    } else if (name.previousValue) {
+      if (Utils.isMobile()) {
+        this.state = this.state === 'refresh' ? 'open' : 'refresh';
+      } else {
+        this.state = this.state === 'refresh' ? 'open' : 'refresh';
+      }
+
       setTimeout(() => {
         this.activeVacancy = name.currentValue
       }, 4e2)
@@ -77,19 +86,4 @@ export class VacancyComponent implements OnInit, OnChanges {
   }
 
   state:string = 'close';
-
-  ngOnInit() {
-    // Owl Carousel
-    // $('#about-slider')['owlCarousel']({
-    //   items:1,
-    //   loop:true,
-    //   margin:15,
-    //   nav: true,
-    //   navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    //   dots : true,
-    //   autoplay : true,
-    //   animateOut: 'fadeOut'
-    // });
-  }
-
 }

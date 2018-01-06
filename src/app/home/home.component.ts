@@ -6,8 +6,7 @@ import { Utils } from '../shared'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  providers: [ContactService]
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   title = 'ЄВРОІНВЕСТСЕРВІС';
@@ -17,23 +16,34 @@ export class HomeComponent implements OnInit {
 
   contacts:Array<Object>;
 
-  // constructor() {}
   constructor(private contactService: ContactService) {}
 
   navigateTo(link) {
-    Utils.scrollTo(link)
+    Utils.scrollTo(link);
   }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe(contacts => {
-      this.contacts = contacts.map(({city, phones}) => {
-        console.log(phones)
+      this.contacts = contacts.map(contact => {
+        var {city, phones} = contact;
         return {
           city,
-          phone: phones[0].number
+          phone: phones[0].number,
+          contact
         }
       });
+    });
+
+    this.contactService.activeContact.subscribe(contact => {
+      if (contact) {
+        this.selectContact(contact);
+        Utils.scrollTo('contact');
+      }
     })
   }
 
+  selectContact(contact) {
+    console.log('selectContact-1111');
+    this.contactService.setActiveContact(contact);
+  }
 }

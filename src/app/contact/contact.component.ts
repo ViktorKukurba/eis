@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations'
-import {ContactService} from "./contact.service";
+import { ContactService } from "./contact.service";
 import { Contact } from './contact'
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  providers: [ContactService],
   animations: [
     trigger('myAwesomeAnimation', [
       state('show', style({
@@ -72,6 +71,10 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
     this.contactService.getContacts().subscribe(contacts => {
       this.contacts = contacts;
+    });
+
+    this.contactService.activeContact.subscribe(contact => {
+      this.selectedContact = contact;
     })
   }
 
@@ -83,7 +86,7 @@ export class ContactComponent implements OnInit {
   }
 
   selectAddress(contact) {
-    this.selectedContact = contact
+    this.contactService.setActiveContact(contact)
   }
 
 }

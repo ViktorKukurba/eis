@@ -1,5 +1,7 @@
 :root {
-  --color: #6195FF;
+  --color: #284687;
+  /*--color: #6195cd;*/
+  /*--color: #6195FF;*/
   --background-hover: #1C1D21;
   --header-color: #10161A;
   --color-text: #868F9B;
@@ -136,7 +138,7 @@ ul, ol {
   top: 0;
   right: 0;
   bottom: 0;
-  opacity: .8;
+  opacity: .5;
   background: #1C1D21;
 }
 
@@ -221,4 +223,24 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 
 .main-btn:hover, .white-btn:hover, .outline-btn:hover {
   opacity: 0.8;
+}
+
+@media only screen and (max-width: 640px) {
+
+  .main-btn , .default-btn , .outline-btn , .white-btn  {
+    padding: 8px 16px;
+    font-size:14px;
+    margin-top: 0;
+  }
+
+  .header-wrapper h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    display: block;
+  }
+
+  .header-wrapper .breadcrumb {
+    float: none;
+    text-align: center;
+  }
 }
