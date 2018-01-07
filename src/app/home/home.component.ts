@@ -34,16 +34,16 @@ export class HomeComponent implements OnInit {
       });
     });
 
-    this.contactService.activeContact.subscribe(contact => {
-      if (contact) {
-        this.selectContact(contact);
-        Utils.scrollTo('contact');
-      }
-    })
+    // this.contactService.activeContact.subscribe(contact => {
+    //   if (contact) {
+    //     this.selectContact(contact);
+    //     Utils.scrollTo('contact');
+    //   }
+    // })
   }
 
   selectContact(contact) {
-    console.log('selectContact-1111');
     this.contactService.setActiveContact(contact);
+    Utils.scrollTo('contact');
   }
 }

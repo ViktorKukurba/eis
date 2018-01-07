@@ -53,25 +53,48 @@ h3.request {
 
 .contact-form {
   overflow: hidden;
+  border: 1px solid #EEE;
+  > form {
+    text-align: center;
+    margin-top: 40px;
+    padding: 0 1em;
+
+    textarea {
+      height: 7em;
+    }
+
+    .input {
+      margin-bottom: 20px;
+    }
+  }
+
+  .alert {
+    position: absolute;
+    top: 40px;
+    font-size: 12px;
+    padding: 0 0 0 10px;
+    background: transparent;
+    border: none;
+
+    &.alert-danger {
+      color: red;
+    }
+  }
 }
 
-.contact-form > form {
-  text-align: center;
-  margin-top: 40px;
-  padding: 0 1em;
-}
+.alert-top {
+  position: fixed;
+  &.alert-dismissible {
+    padding-right: 3em;
+  }
+  top: 3em;
+  z-index: 1;
+  right: 50%;
+  transform: translateX(50%);
 
-.contact-form .input {
-  margin-bottom: 20px;
-}
-
-
-.contact-form .input:nth-child(1), .contact-form .input:nth-child(2) {
-  width: calc(50% - 10px);
-}
-
-.contact-form .input:nth-child(2) {
-  margin-left: 15px;
+  .close {
+    cursor: pointer;
+  }
 }
 
 .btn-group {

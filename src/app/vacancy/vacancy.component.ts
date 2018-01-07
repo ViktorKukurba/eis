@@ -1,7 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations'
-import { Vacancy } from '../vacancy/vacancy'
-import {Utils} from "../shared/index";
+import { Vacancy } from '../vacancy/vacancy';
+import { VacanciesService } from '../vacancies/vacancies.service';
+import { Utils } from "../shared/index";
 declare var $ :any;
 
 var refreshAnimation = animate('700ms ease-in',
@@ -60,9 +61,7 @@ export class VacancyComponent implements OnChanges {
     animateOut: 'fadeOut'
   }
 
-  constructor() {
-
-  }
+  constructor(private vacanciesService: VacanciesService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.vacancy;
@@ -83,6 +82,11 @@ export class VacancyComponent implements OnChanges {
       this.activeVacancy = name.currentValue
       this.state = 'open'
     }
+  }
+
+  requestVacancy(vacancy: Vacancy) {
+    this.vacanciesService.requestVacancy(vacancy);
+    Utils.scrollTo('request-form');
   }
 
   state:string = 'close';

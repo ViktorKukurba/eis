@@ -27,17 +27,17 @@
       </div>
     </div>
     <!-- /Row -->
-    <div class="row map-container" [@showMap]="mapState">
+    <div id="map-container" class="row map-container" [@showMap]="mapState">
       <agm-map *ngIf="selectedContact" class="col-12" [zoom]="17" [latitude]="selectedContact.lat" [longitude]="selectedContact.lng">
         <agm-marker [latitude]="selectedContact.lat" [longitude]="selectedContact.lng"></agm-marker>
       </agm-map>
     </div>
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="contact">
           <i class="fa fa-envelope"></i>
           <h3>Елекронна пошта</h3>
-          <p>eislviv@gmail.com</p>
+          <p><a href="mailto:eislviv@gmail.com">eislviv@gmail.com</a></p>
         </div>
       </div>
     </div>
@@ -49,17 +49,53 @@
           <p>Заповніть онлайн форму та наші працівники Вам перетелефонують:</p>
           <button type="button" (click)="formActive = !formActive" class="btn main-btn">Онлайн форма</button>
           <div class="col-md-8" [@myAwesomeAnimation]='formState' class="contact-form">
-            <form>
-              <input type="text" class="input" placeholder="Імя">
-              <input type="email" class="input" placeholder="Електронна пошта">
-              <textarea class="input" placeholder="Про себе"></textarea>
-              <button type="submit" (click)="sendForm()" class="main-btn">Надіслати</button>
+            <form (ngSubmit)="sendForm(f)" #f="ngForm" class="row justify-content-around">
+              <div class="col-md-6">
+                <input type="text" class="input" [(ngModel)]="request.name" [ngModelOptions]="{updateOn: 'blur'}" name="name" #name="ngModel" required minlength="4" placeholder="Прізвище Ім'я Побатькові">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                  <div *ngIf="name.errors.required">Небхідно ввести прізвище та ім'я</div>
+                  <div *ngIf="name.errors.minlength">Введіть повне ім'я</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="input" [(ngModel)]="request.phone" [ngModelOptions]="{updateOn: 'blur'}" #phone="ngModel" minlength="5" name="phone" required placeholder="Контактний номер">
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                  <div *ngIf="phone.errors.required">Небхідно ввести контактний номер</div>
+                  <div *ngIf="phone.errors.minlength">Введіть коректний номер телефону</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <select class="custom-select custom-select-lg mb-3" name="vacancy" #vacancy="ngModel" required [(ngModel)]="request.vacancy" required>
+                  <option selected value="">Вибір вакансії</option>
+                  <option *ngFor="let vacancy of vacancies"
+                          [value]="vacancy">{{vacancy}}
+                  </option>
+                </select>
+                <div *ngIf="vacancy.invalid && (vacancy.dirty || vacancy.touched)" class="alert alert-danger">
+                  <div *ngIf="vacancy.errors.required">Небхідно вибрати вакансію</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="input" [(ngModel)]="request.email" name="email" placeholder="Електронна пошта">
+                <div class="alert alert-success">
+                  <div>Не обов'язкове поле.</div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <textarea class="input" [(ngModel)]="request.description" name="description" placeholder="Коротко про себе (вік, досвід роботи ...)"></textarea>
+              </div>
+              <button type="submit" [disabled]="f.invalid" class="main-btn">Надіслати</button>
             </form>
           </div>
           <p>Відправити скан/фото заповненої анкети:</p>
           <div class="btn-group" role="group" aria-label="Basic example">
             <a target="_blank" href="/assets/Anketa-EIS.pdf" download="Anketa-EIS.pdf" class="btn outline-btn">Скачати анкету</a>
-            <button type="button" class="btn main-btn">Завантажити анкету</button>
+            <!--<button type="button" class="btn main-btn">Завантажити анкету</button>-->
+            <div class="custom-file">
+              <input type="file" (change)="uploadRequestForm($event.target.files, file)" #file class="custom-file-input" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="validatedCustomFile">Завантажити анкету</label>
+              <div class="invalid-feedback">Помилка при завантаженні, спробуйте ще раз.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -67,6 +103,28 @@
 
   </div>
   <!-- /Container -->
+
+  <div *ngIf="sendFormError" class="alert alert-danger alert-top alert-dismissible fade" [ngClass]="{show: sendFormError}" role="alert">
+    <strong>Помилка!</strong> Заявку не надіслано, спробуйте ще раз, або скористайтесь контактним телефоном.
+    <button type="button" class="close" (click)="sendFormError = false" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div *ngIf="uploadFormError" class="alert alert-danger alert-top alert-dismissible fade" [ngClass]="{show: uploadFormError}" role="alert">
+    <strong>Помилка!</strong> Анкету не завантажено, спробуйте ще раз, або скористайтесь електронною поштою.
+    <button type="button" class="close" (click)="uploadFormError = false" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div *ngIf="sendFormSuccess" class="alert alert-success alert-top fade" [ngClass]="{show: sendFormSuccess}" role="alert">
+    Заявка успішно надіслана, наші працівники Вам зателефонують.
+  </div>
+
+  <div *ngIf="uploadFormSuccess" class="alert alert-success alert-top fade" [ngClass]="{show: uploadFormSuccess}" role="alert">
+    Анкета успішно завантажена, наші працівники Вам зателефонують.
+  </div>
 
 </div>
 <!-- /Contact -->

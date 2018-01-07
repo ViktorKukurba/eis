@@ -1,5 +1,6 @@
 :root {
   --color: #284687;
+  --color-disabled: #868F9B;
   /*--color: #6195cd;*/
   /*--color: #6195FF;*/
   --background-hover: #1C1D21;
@@ -168,15 +169,17 @@ ul, ol {
 
 /* --  Input  -- */
 
-input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], input[type="url"], input[type="tel"], textarea {
+select, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], input[type="url"], input[type="tel"], textarea {
   height: 40px;
   width: 100%;
   border: none;
-  background: #F4F4F4;
+  /*background: #F4F4F4;*/
+  background: #dfe3ed;
   border-bottom: 2px solid #EEE;
-  color: #354052;
+  /*color: #354052;*/
+  color: var(--header-color);
   padding: 0px 10px;
-  opacity: 0.5;
+  opacity: 0.8;
   -webkit-transition: 0.2s border-color, 0.2s opacity;
   transition: 0.2s border-color, 0.2s opacity;
 }
@@ -208,6 +211,37 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 .main-btn {
   background: var(--color);
   color: #FFF;
+}
+
+.custom-file {
+  margin: 3px;
+  background: var(--color);
+  display: inline-block;
+  color: #FFF;
+  cursor: pointer;
+  height: 100%;
+  position: relative;
+}
+
+.custom-file > input {
+  height: 3em;
+  width: 12em;
+  min-width: auto;
+}
+
+.custom-file > label {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 100%;
+  line-height: 3em;
+  cursor: pointer;
+}
+
+.main-btn[disabled] {
+  background: var(--color-disabled);
+  cursor: not-allowed;
 }
 
 .white-btn {

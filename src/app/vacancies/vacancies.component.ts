@@ -8,8 +8,7 @@ import { Utils } from '../shared'
 @Component({
   selector: 'app-vacancies',
   templateUrl: './vacancies.component.html',
-  styleUrls: ['./vacancies.component.scss'],
-  providers: [VacanciesService]
+  styleUrls: ['./vacancies.component.scss']
 })
 export class VacanciesComponent implements OnInit {
 
@@ -39,6 +38,10 @@ export class VacanciesComponent implements OnInit {
         this.active = undefined;
       }
     });
+  }
+
+  uploadRequestForm() {
+
   }
 
 }
