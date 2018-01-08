@@ -264,7 +264,15 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   .main-btn , .default-btn , .outline-btn , .white-btn  {
     padding: 8px 16px;
     font-size:14px;
-    margin-top: 0;
+    /*margin-top: 0;*/
+  }
+
+  .btn-group {
+    display: block;
+  }
+
+  .custom-file {
+    font-size: 14px;
   }
 
   .header-wrapper h2 {
