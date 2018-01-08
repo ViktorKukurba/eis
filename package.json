@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start_depricated": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
