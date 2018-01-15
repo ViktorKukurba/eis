@@ -3,7 +3,9 @@ import { VacanciesService } from './vacancies.service'
 import { Vacancy } from '../vacancy/vacancy'
 import { AppService } from '../app.service'
 
-import { Utils } from '../shared'
+import {Utils, DefaultContent} from '../shared'
+import {WpService} from "../wp.service";
+import {Pages} from "../shared/constants";
 
 @Component({
   selector: 'app-vacancies',
@@ -15,8 +17,11 @@ export class VacanciesComponent implements OnInit {
   public vacancies:Array<Vacancy>;
 
   active:Object;
+  pageContent:DefaultContent = new DefaultContent()
 
-  constructor(private vacanciesService: VacanciesService, private appService:AppService) { }
+  constructor(private vacanciesService: VacanciesService,
+              private appService:AppService,
+              private wpService: WpService) { }
 
   vacancyDetails(vacancy) {
     this.active = vacancy;
@@ -24,7 +29,7 @@ export class VacanciesComponent implements OnInit {
       if (Utils.isMobile()) {
         Utils.scrollTo('vacancy-details');
       } else {
-        Utils.scrollTo('vacancies');
+        Utils.scrollTo(Pages.VACANCIES);
       }
     }, 1e1)
   }
@@ -34,9 +39,12 @@ export class VacanciesComponent implements OnInit {
       this.vacancies = vacancies
     });
     this.appService.activeSection.subscribe(section => {
-      if (!['#vacancies', '#contact'].includes(section)) {
+      if (![Pages.VACANCIES, Pages.CONTACT].includes(section)) {
         this.active = undefined;
       }
+    });
+    this.wpService.getPageBySlug(Pages.VACANCIES).subscribe((page:DefaultContent) => {
+      this.pageContent = page;
     });
   }
 

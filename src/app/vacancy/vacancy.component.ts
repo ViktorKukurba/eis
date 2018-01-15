@@ -3,6 +3,7 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 import { Vacancy } from '../vacancy/vacancy';
 import { VacanciesService } from '../vacancies/vacancies.service';
 import { Utils } from "../shared/index";
+import { environment } from '../../environments/environment';
 declare var $ :any;
 
 var refreshAnimation = animate('700ms ease-in',
@@ -66,7 +67,6 @@ export class VacancyComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const name: SimpleChange = changes.vacancy;
     if (!name.currentValue) {
-      console.log('close-vacancy');
       this.state = 'close'
     } else if (name.previousValue) {
       if (Utils.isMobile()) {
@@ -87,6 +87,10 @@ export class VacancyComponent implements OnChanges {
   requestVacancy(vacancy: Vacancy) {
     this.vacanciesService.requestVacancy(vacancy);
     Utils.scrollTo('request-form');
+  }
+
+  getImageURL(image) {
+    return environment.wpDist + image;
   }
 
   state:string = 'close';

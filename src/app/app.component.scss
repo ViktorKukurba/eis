@@ -29,6 +29,14 @@
   opacity: 0.8;
 }
 
+.footer-logo a {
+  background: url("../assets/icons/logo-white.png") no-repeat;
+  background-size: contain;
+  display: inline-block;
+  width: 6em;
+  height: 4em;
+}
+
 
 /*------------------------------------*\
 	Preloader

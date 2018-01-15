@@ -203,8 +203,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   margin: 3px;
   border: 2px solid transparent;
   border-radius: 3px;
-  -webkit-transition: 0.2s opacity;
-  transition: 0.2s opacity;
+  /*-webkit-transition: 0.2s opacity;*/
+  /*transition: 0.2s opacity;*/
   cursor: pointer;
 }
 
@@ -265,10 +265,6 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
     padding: 8px 16px;
     font-size:14px;
     /*margin-top: 0;*/
-  }
-
-  .btn-group {
-    display: block;
   }
 
   .custom-file {

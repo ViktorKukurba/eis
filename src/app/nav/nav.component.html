@@ -1,6 +1,9 @@
 <!-- Nav -->
 <nav id="nav" class="navbar navbar-expand-md nav-transparent" [ngClass]="{'fixed-nav': fixedNav}">
-  <a class="navbar-brand" href="javascript:void(0)">ЄВРОІНВЕСТСЕРВІС</a>
+  <a class="navbar-brand" href="javascript:void(0)" i18n="Company name"></a>
+  <div class="phones">
+    <a *ngFor="let phone of phones" href="tel:{{phone}}"><i class="fa fa-phone"></i>{{phone}}</a>
+  </div>
   <!-- Collapse nav button -->
   <button class="navbar-toggler nav-collapse" (click)="toggleNav()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span></span>
@@ -12,6 +15,11 @@
     <ul class="main-nav nav navbar-nav">
       <li *ngFor="let link of links" [ngClass]="{active: link.hash === activeSection}">
         <a (click)="navigate($event, link)" for="nav" href="#{{link.hash}}">{{link.title}}</a>
+      </li>
+      <li class="lang-item">
+        <ul class="lang-nav nav navbar-nav">
+          <li *ngFor="let lang of languages"><a href="/{{lang}}" [ngClass]="{active: lang === currentLanguage}">{{lang.toUpperCase()}}</a></li>
+        </ul>
       </li>
     </ul>
     <!-- /Main navigation -->

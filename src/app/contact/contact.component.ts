@@ -5,7 +5,9 @@ import { VacanciesService } from '../vacancies/vacancies.service'
 import { Contact } from './contact';
 import { Request, getEmptyRequest } from './request';
 import { Vacancy } from "../vacancy/vacancy";
-import {Utils} from "../shared/index";
+import { Utils } from "../shared/index";
+import { WpService } from "../wp.service";
+import {Pages} from "../shared/constants";
 
 @Component({
   selector: 'app-contact',
@@ -57,7 +59,7 @@ import {Utils} from "../shared/index";
 })
 export class ContactComponent implements OnInit {
 
-  public contacts:Contact[] = []
+  public contacts: Contact[] = []
 
   request: Request = getEmptyRequest();
   formActive: boolean = false;
@@ -69,7 +71,8 @@ export class ContactComponent implements OnInit {
 
   vacancies: string[] = [];
 
-  selectedContact:Contact;
+  selectedContact: Contact;
+  pageContent: any = {title: {}};
 
   get formState() {
     return this.formActive ? 'show' : 'hide';
@@ -79,10 +82,12 @@ export class ContactComponent implements OnInit {
     return this.selectedContact ? 'show' : 'hide';
   }
 
-  constructor(private contactService: ContactService, private vacanciesService: VacanciesService) {}
+  constructor(private contactService: ContactService,
+              private vacanciesService: VacanciesService,
+              private wpService: WpService) {}
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe(contacts => {
+    this.contactService.contacts.subscribe(contacts => {
       this.contacts = contacts;
     });
 
@@ -96,23 +101,32 @@ export class ContactComponent implements OnInit {
       });
     });
 
-    this.vacanciesService.requestedVacancy.subscribe((vacancy:Vacancy) => {
+    this.vacanciesService.requestedVacancy.subscribe((vacancy: Vacancy) => {
       if (vacancy) {
         this.request.vacancy = vacancy.name;
         this.formActive = true;
       }
+    });
+
+    this.wpService.getPageBySlug(Pages.CONTACT).subscribe(page => {
+      this.pageContent = page;
     })
+
   }
 
   sendForm(form) {
-    this.contactService.sendEmail('Test').subscribe(res => {
-      console.log('sendForm', res);
-      form.reset();
-      this.sendFormSuccess = true;
-      this.formActive = false;
-      setTimeout(() => {
-        this.sendFormSuccess = false;
-      }, 5e3);
+    this.contactService.sendEmail(this.request).subscribe(res => {
+      if (res.success) {
+        form.reset();
+        this.sendFormSuccess = true;
+        this.formActive = false;
+        setTimeout(() => {
+          this.sendFormSuccess = false;
+        }, 5e3);
+      } else {
+        this.sendFormError = true;
+        console.error('oops', new Error('Not successful'));
+      }
     }, error => {
       this.sendFormError = true;
       console.error('oops', error);
@@ -124,23 +138,26 @@ export class ContactComponent implements OnInit {
     if (Utils.isMobile()) {
       Utils.scrollTo('map-container', -150);
     } else {
-      Utils.scrollTo('contact');
+      Utils.scrollTo(Pages.CONTACT);
     }
   }
 
-  uploadRequestForm(files: FileList, input:HTMLInputElement) {
-    this.fileToUpload = files.item(0);
-    console.log(input.value);
-    this.contactService.sendFile(this.fileToUpload).subscribe(data => {
-      // do something, if upload success
-      this.uploadFormSuccess = true;
-      this.fileToUpload = null;
-    }, error => {
-      console.log(error);
-      this.uploadFormError = true;
-      this.fileToUpload = null;
-      input.value = '';
-    });
+  private handleUploadError(error: Error, input) {
+    console.log(error);
+    this.uploadFormError = true;
+    this.fileToUpload = null;
+    input.value = '';
   }
 
+  uploadRequestForm(files: FileList, input: HTMLInputElement) {
+    this.fileToUpload = files.item(0);
+    this.contactService.sendFile(this.fileToUpload).subscribe(data => {
+      if (data.success) {
+        this.uploadFormSuccess = true;
+        this.fileToUpload = null;
+      } else {
+        this.handleUploadError(new Error('Not successful'), input);
+      }
+    }, error => this.handleUploadError(error, input));
+  }
 }

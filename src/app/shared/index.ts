@@ -4,12 +4,16 @@ import * as MobileDetect from "mobile-detect";
 export class Utils {
     private static md:MobileDetect = new MobileDetect(window.navigator.userAgent);
     static scrollTo(link, offset = 0) {
-        $('html, body').animate({
-            scrollTop: $(`#${link}`).offset().top + offset
-        }, 600);
+        var elementOffset = $(`#${link}`).offset();
+        if (elementOffset) {
+            $('html, body').animate({
+                scrollTop: elementOffset.top + offset
+            }, 600);
+        }
     }
 
     static isElementOnView(element) {
+        if (!element) return false;
         var top = element.offsetTop;
         var offset = window.innerHeight * 0.5;
         var pageTop = window.pageYOffset
@@ -25,4 +29,8 @@ export class Utils {
     static isMobile() {
         return this.md.mobile();
     }
+}
+
+export class DefaultContent {
+    title: {rendered:string} = {rendered: ''};
 }

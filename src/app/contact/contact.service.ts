@@ -4,22 +4,50 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../environments/environment';
 import { Contact } from './contact'
+import { Request } from './request'
 import 'rxjs/add/operator/catch';
+import {WpService} from "../wp.service";
+import {Pages} from "../shared/constants";
 
 @Injectable()
 export class ContactService {
-
-  private _wpSite = environment.wpSite;
-
-  private CONTACT_POST_URL = this._wpSite + 'wp-admin/admin-ajax.php?action=send_message';
-  private REQUEST_FORM_POST_URL = this._wpSite + 'wp-admin/admin-ajax.php?action=send_file';
-  private CONTACTS_URL = '/assets/data/contacts.json';
+  private CONTACT_POST_URL =  environment.wpSite + 'wp-admin/admin-ajax.php?action=send_message';
+  private REQUEST_FORM_POST_URL =  environment.wpSite + 'wp-admin/admin-ajax.php?action=send_file';
+  private CONTACTS_URL = environment.wpDist + 'assets/data/contacts.json';
 
   private activeContact_ = new BehaviorSubject<Contact>(undefined);
+  private contacts_ = new BehaviorSubject<Array<Contact>>([]);
 
   activeContact = this.activeContact_.asObservable();
+  contacts = this.contacts_.asObservable();
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private wpService: WpService) {
+    this.wpService.categories_.subscribe(categories => {
+      if (categories && categories.length) {
+        let contactCategory = categories.find(c => c.slug === Pages.CONTACT);
+        this.wpService.getPostsByCategoryId(contactCategory.id).subscribe(contacts => {
+          this.contacts_.next(contacts.map(this.formatter));
+        })
+      }
+    })
+  }
+
+  private formatter(contact):Contact {
+    contact = (<any>contact).acf;
+    let phones = (<any>contact).phones ? (<any>contact).phones.split(',').map(number => {
+      return { number, viber: false }
+    }) : [];
+    return <Contact>{
+      city: `${(<any>contact).country} ${(<any>contact).city}`,
+      phones: (<any>contact).vibers.split(',').map(viber => {
+        return {
+          number: viber.trim(),
+          viber: true
+        }
+      }).concat(phones),
+      lat: +(<any>contact).coordinates.lat,
+      lng: +(<any>contact).coordinates.lng,
+    }
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -28,13 +56,17 @@ export class ContactService {
     return Observable.throw(new Error(error.error));
   }
 
-  sendEmail(message: string): Observable<any> {
+  sendEmail(req: Request): Observable<any> {
     const formData = new FormData();
-    formData.append('message', message)
+    formData.append('message', req.description);
+    formData.append('email', req.email);
+    formData.append('vacancy', req.vacancy);
+    formData.append('phone', req.phone);
+    formData.append('name', req.name);
     return this.http.post(this.CONTACT_POST_URL, formData).catch(this.handleError);
   }
 
-  sendFile(fileToUpload: File): Observable<boolean> {
+  sendFile(fileToUpload: File): Observable<{success:boolean}> {
     const formData: FormData = new FormData();
     formData.append('requestForm', fileToUpload, fileToUpload.name);
     return this.http.post(this.REQUEST_FORM_POST_URL, formData).catch(this.handleError);

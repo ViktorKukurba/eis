@@ -20,6 +20,7 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './contact/contact.service';
 import { VacanciesService } from './vacancies/vacancies.service'
+import { WpService } from './wp.service'
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { AgmCoreModule } from '@agm/core';
 
@@ -56,7 +57,7 @@ const providers = [
       apiKey: 'AIzaSyCfDuzk8cLBCL4z3lqmb6oA6e5P4VSnY0I'
     })
   ],
-  providers: [ContactService, VacanciesService],
+  providers: [ContactService, VacanciesService, WpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

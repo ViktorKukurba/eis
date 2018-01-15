@@ -16,9 +16,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     $("#preloader").delay(600).fadeOut();
-
     this.appService.windowScroll.subscribe(position => {
-      this.isBackTop = position > 700
+      this.isBackTop = position > 700;
     });
   }
 

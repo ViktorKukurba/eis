@@ -1,0 +1,6 @@
+[
+  { "title": "Головна", "hash": "home" },
+  { "title": "Про нас", "hash": "about" },
+  { "title": "Вакансії", "hash": "vacancies" },
+  { "title": "Контакти", "hash": "contact" }
+]

@@ -3,6 +3,7 @@
 .section {
   p {
     text-align: justify;
+    margin-bottom: 0;
   }
 
   ul {
@@ -14,6 +15,10 @@
   }
 }
 
+.sections .section:nth-child(3) p {
+  text-align: center;
+}
+
 /*------------------------------------*\
 	About
 \*------------------------------------*/
@@ -21,7 +26,7 @@
 .about {
   position: relative;
   text-align: center;
-  padding: 40px 20px;
+  padding: 1em;
   border: 1px solid #EEE;
   margin: 15px 0px;
   height: 100%;

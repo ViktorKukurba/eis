@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ContactService } from '../contact/contact.service'
+import { AppService } from '../app.service'
+import { WpService } from '../wp.service'
 import { Utils } from '../shared'
+import { Pages } from "../shared/constants";
 
 @Component({
   selector: 'app-home',
@@ -9,30 +12,44 @@ import { Utils } from '../shared'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'ЄВРОІНВЕСТСЕРВІС';
-  subtitle = 'Ми успішно надаємо послуги працевлаштування за будівельними спеціальностями громадянам України, Білорусі та Молдови на території Польші, Литви, Латвії та Німеччини'
-  vacanciesLink = 'Пошук вакансій'
-  formLink = 'Залишити заявку'
 
-  contacts:Array<Object>;
+  pageContent:HomePageContent = new HomePageContent();
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService,
+              private appService: AppService,
+              private wpService: WpService) {}
 
   navigateTo(link) {
     Utils.scrollTo(link);
   }
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe(contacts => {
-      this.contacts = contacts.map(contact => {
-        var {city, phones} = contact;
-        return {
-          city,
-          phone: phones[0].number,
-          contact
-        }
-      });
+    this.wpService.getPageBySlug(Pages.HOME).subscribe((page:{acf: HomePageContent}) => {
+      this.pageContent = page.acf;
     });
+    // this.wpService.pages.subscribe(pages => {
+    //   if (pages && pages.length) {
+    //     this.pageContent = pages.find(page => page.slug === 'home').acf;
+    //   }
+    // });
+
+    // this.appService.appInfo.subscribe(info => {
+    //   if (info) {
+    //     this.title = info.title;
+    //     this.subtitle = info.description;
+    //   }
+    // });
+
+    // this.contactService.contacts.subscribe(contacts => {
+    //   this.contacts = contacts.map(contact => {
+    //     var {city, phones} = contact;
+    //     return {
+    //       city,
+    //       phone: phones[0].number,
+    //       contact
+    //     }
+    //   });
+    // });
 
     // this.contactService.activeContact.subscribe(contact => {
     //   if (contact) {
@@ -46,4 +63,13 @@ export class HomeComponent implements OnInit {
     this.contactService.setActiveContact(contact);
     Utils.scrollTo('contact');
   }
+}
+
+export class HomePageContent {
+  site_title: string;
+  sub_title: string;
+  action_button:string;
+  search_button:string;
+  phone_number:string;
+  secondary_phone_number:string;
 }

@@ -34,6 +34,10 @@ header {
     transform: translateY(-50%);
     text-align: center;
   }
+
+  .bg-img {
+    background-image: url('../../assets/img/background.jpg');
+  }
 }
 
 .home-content {
@@ -84,14 +88,16 @@ header {
   }
 
   .home-content button {
-    margin-top: 0;
+    display: block;
+    min-width: 11em;
+    margin: 2em auto;
   }
 }
 
 @media only screen and (max-width: 640px) {
   #home {
     .home-wrapper {
-      top: 40%;
+      top: 50%;
     }
   }
   .home-content h1 {
