@@ -10,14 +10,37 @@
 
 .vacancy-item {
   position: relative;
-  padding: 1em 1em 1em 2em;
+  padding: 1em 1em 1em 1.5em;
   border: 1px solid #EEE;
   cursor: pointer;
   height: 100%;
 
+  &.female.male {
+    padding-left: 3em;
+    i+i {
+      margin-left: .1em;
+    }
+  }
+
+  &.female {
+    i.fa-female {
+      display: inline-block;
+    }
+  }
+
+  &.male {
+    i.fa-male {
+      display: inline-block;
+    }
+  }
+
   i {
+    display: none;
+  }
+
+  .gender {
     position: absolute;
-    left: 0.25em;;
+    left: .1em;
     text-align: center;
     font-size: 32px;
     color: $--color;

@@ -35,10 +35,27 @@ export class WpService {
             return resolve(page);
           } else {
             subscription.unsubscribe();
-            return Promise.reject('No page found with such slug');
+            return Promise.reject(`No page found with such slug: ${slug}`);
           }
         }
       });
+    }));
+  }
+
+  getPostsByCategorySlug(categorySlug) {
+    return Observable.fromPromise(new Promise((resolve) => {
+      this.categories_.subscribe(categories => {
+        if (categories && categories.length) {
+          let contactCategory = categories.find(c => c.slug === categorySlug);
+          if (contactCategory) {
+            this.getPostsByCategoryId(contactCategory.id).subscribe(posts => {
+              resolve(posts);
+            });
+          } else {
+            return Promise.reject(`No category found with such slug: ${categorySlug}`);
+          }
+        }
+      })
     }));
   }
 

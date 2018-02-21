@@ -381,12 +381,14 @@
     background-image: url("../../assets/icons/logo.png");
   }
 
-  .lang-item {
-    &.active {
-      border-left: 6px solid $--color;
-    }
-    a {
-      color: white;
+  #nav {
+    .lang-item {
+      &.active {
+        border-left: 6px solid $--color;
+      }
+      a {
+        color: white;
+      }
     }
   }
 

@@ -1,5 +1,5 @@
 import * as $ from 'jquery'
-import * as MobileDetect from "mobile-detect";
+import * as MobileDetect from 'mobile-detect';
 
 export class Utils {
     private static md:MobileDetect = new MobileDetect(window.navigator.userAgent);

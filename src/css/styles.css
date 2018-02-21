@@ -8,6 +8,18 @@
   --color-text: #868F9B;
 }
 
+.app-section > div {
+  opacity: .8;
+  transition: .5s;
+}
+
+.app-section.active>div,
+.app-section > div:hover {
+  opacity: 1;
+}
+
+
+
 /*------------------------------------*\
 	General
 \*------------------------------------*/

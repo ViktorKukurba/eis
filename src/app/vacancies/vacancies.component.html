@@ -10,15 +10,17 @@
     <!-- /Section header -->
     <!-- Row -->
     <div class="row" id="vacancies-list">
-      <!-- vacancy item -->
-      <div *ngFor="let vacancy of vacancies" (click)="vacancyDetails(vacancy)" class="col-md-3 col-sm-6 vacancy-wrapper">
-        <div class="vacancy-item">
-          <h5><i class="fa fa-male"></i>{{vacancy.name}}</h5>
-          <p>{{vacancy.place}}.<a href="javascript:void(0);">Детальніше</a></p>
+      <div *ngFor="let vacancy of wpVacancies" (click)="vacancyDetails(vacancy)" class="col-md-3 col-sm-6 vacancy-wrapper">
+        <div class="vacancy-item {{vacancy.gender.toLowerCase()}}">
+          <h5>
+            <div class="gender">
+              <i class="fa fa-female"></i><i class="fa fa-male"></i>
+            </div>
+            {{vacancy.title}}
+          </h5>
+          <p>{{vacancy.location}}.<a href="javascript:void(0);" appTranslate>Details</a></p>
         </div>
       </div>
-      <!-- /service -->
-
     </div>
     <!-- /Row -->
   </div>

@@ -2,67 +2,65 @@
 <div id="vacancy-details">
   <!-- Container -->
   <div class="container" [@myAwesomeAnimation]='state'>
-
-    <!-- Row -->
     <div class="row" *ngIf="activeVacancy">
       <!-- Vacancy slider -->
       <div class="col-md-6">
         <div class="section-header text-center">
-          <h3 class="title">{{activeVacancy.name}}</h3>
+          <h3 class="title">{{activeVacancy.title}}</h3>
         </div>
         <owl-carousel *ngIf="activeVacancy" [options]="options" [items]="activeVacancy.images" [carouselClasses]="['owl-theme', 'row', 'sliding']">
-          <img *ngFor="let image of activeVacancy.images;let i = index" class="img-responsive" [src]=getImageURL(image) alt="">
+          <img *ngFor="let image of activeVacancy.images;let i = index" class="img-responsive" [src]=image alt="">
         </owl-carousel>
       </div>
       <!-- /Vacancy slider -->
       <div class="col-md-6">
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>МІСЦЕ РОЗТАШУВАННЯ:</span> {{activeVacancy.place}}</p>
+          <p><span appTranslate>location</span>: {{activeVacancy.location}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>СТАТЬ:</span> {{activeVacancy.sex}} <span> ВІК:</span> {{activeVacancy.age}}</p>
+          <p><span appTranslate>gender</span>: {{activeVacancy.genderTranslated}} <span appTranslate>age</span>: {{activeVacancy.age}}</p>
         </div>
         <!--<div class="vacancy-info-block">-->
-          <!--<i class="fa fa-check"></i>-->
-          <!--<p>-->
+        <!--<i class="fa fa-check"></i>-->
+        <!--<p>-->
         <!--</div>-->
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>КВАЛІФІКАЦІЯ:</span> {{activeVacancy.experience}}, {{activeVacancy.language}}, {{activeVacancy.additional}}</p>
+          <p><span appTranslate>qualification</span>: {{activeVacancy.experience}} {{activeVacancy.language}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>ОБОВ'ЯЗКИ:</span> {{(activeVacancy.duties)?.join(', ')}}</p>
+          <p><span appTranslate>duties</span>: {{activeVacancy.duties}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>РОБОЧИЙ ГРАФІК:</span> {{(activeVacancy.schedule)?.join(', ')}}</p>
+          <p><span appTranslate>work schedule</span>: {{activeVacancy.schedule}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>ЗАРПЛАТА:</span> {{activeVacancy.payment}}</p>
+          <p><span appTranslate>payment</span>: {{activeVacancy.payment}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>РОБОЧІ УМОВИ:</span> {{(activeVacancy.conditions)?.join(', ')}}</p>
+          <p><span appTranslate>work conditions</span>: {{activeVacancy.conditions}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>УМОВИ ПРАЦЕВЛАШТУВАННЯ:</span> {{(activeVacancy.employment)?.join(', ')}}</p>
+          <p><span appTranslate>employment conditions</span>: {{activeVacancy.employment}} {{activeVacancy.additional}}</p>
         </div>
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
-          <p><span>УМОВИ ПРОЖИВАННЯ:</span> {{(activeVacancy.residence)?.join(', ')}}</p>
+          <p><span appTranslate>residence conditions</span>: {{activeVacancy.residence}}</p>
         </div>
       </div>
       <!-- /Vacancy -->
       <div class="text-center col-md-6 offset-md-6">
-        <button type="button" (click)="requestVacancy(activeVacancy)" class="btn main-btn">Подати заявку</button>
+        <button type="button" (click)="requestVacancy(activeVacancy)" class="btn main-btn" appTranslate>Apply</button>
       </div>
     </div>
-    <!-- /Row -->
+
 
   </div>
   <!-- /Container -->

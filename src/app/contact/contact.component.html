@@ -5,7 +5,7 @@
   <div class="container">
     <!-- Section-header -->
     <div class="section-header text-center">
-      <h2 class="title">{{pageContent.title.rendered}}</h2>
+      <h2 class="title">{{pageContent.title}}</h2>
     </div>
     <!-- /Section-header -->
     <!-- Row -->
@@ -14,8 +14,8 @@
       <div *ngFor="let contact of contacts" class="col-md-4">
         <div class="contact" [ngClass]="{active: selectedContact && contact.city === selectedContact.city}">
           <div><h4>{{contact.city}}</h4></div>
-          <div>{{contact.address}}</div>
-          <a href="javascript:void(0)" (click)="selectAddress(contact)"><i class="fa fa-map-marker"></i>Показати на карті</a>
+          <div>{{contact.street}}</div>
+          <a href="javascript:void(0)" (click)="selectAddress(contact)"><i class="fa fa-map-marker"></i><span appTranslate>Show on map</span></a>
           <div class="phones">
             <div *ngFor="let phone of contact.phones">
               <a [href]="'tel:' + phone.number">
@@ -36,8 +36,8 @@
       <div class="col-md-12">
         <div class="contact">
           <i class="fa fa-envelope"></i>
-          <h3>Елекронна пошта</h3>
-          <p><a href="mailto:eislviv@gmail.com">eislviv@gmail.com</a></p>
+          <h3>{{pageContent.email_label}}</h3>
+          <p><a href="mailto:{{pageContent.contact_email}}">{{pageContent.contact_email}}</a></p>
         </div>
       </div>
     </div>
@@ -45,27 +45,27 @@
     <!-- contact form -->
       <div class="row justify-content-center sm-padding" id="request-form">
         <div class="section-header text-center col-md-12">
-          <h2 class="title">Оформити заявку</h2>
-          <p>Заповніть онлайн форму та наші працівники Вам перетелефонують:</p>
-          <button type="button" (click)="formActive = !formActive" class="btn main-btn">Онлайн форма</button>
+          <h2 class="title">{{pageContent.request_label}}</h2>
+          <p>{{pageContent.online_form_info}}</p>
+          <button type="button" (click)="formActive = !formActive" class="btn main-btn">{{pageContent.online_form_open_action}}</button>
           <div class="col-md-8" [@myAwesomeAnimation]='formState' class="contact-form">
             <form (ngSubmit)="sendForm(f)" #f="ngForm" class="row justify-content-around">
               <div class="col-md-6">
-                <input type="text" class="input" [(ngModel)]="request.name" [ngModelOptions]="{updateOn: 'blur'}" name="name" #name="ngModel" required minlength="4" placeholder="Прізвище Ім'я Побатькові">
+                <input type="text" class="input" [(ngModel)]="onlineForm.name" [ngModelOptions]="{updateOn: 'blur'}" name="name" #name="ngModel" required minlength="4" placeholder="Прізвище Ім'я Побатькові">
                 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
                   <div *ngIf="name.errors.required">Небхідно ввести прізвище та ім'я</div>
                   <div *ngIf="name.errors.minlength">Введіть повне ім'я</div>
                 </div>
               </div>
               <div class="col-md-6">
-                <input type="text" class="input" [(ngModel)]="request.phone" [ngModelOptions]="{updateOn: 'blur'}" #phone="ngModel" minlength="5" name="phone" required placeholder="Контактний номер">
+                <input type="text" class="input" [(ngModel)]="onlineForm.phone" [ngModelOptions]="{updateOn: 'blur'}" #phone="ngModel" minlength="5" name="phone" required placeholder="Контактний номер">
                 <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
                   <div *ngIf="phone.errors.required">Небхідно ввести контактний номер</div>
                   <div *ngIf="phone.errors.minlength">Введіть коректний номер телефону</div>
                 </div>
               </div>
               <div class="col-md-6">
-                <select class="custom-select custom-select-lg mb-3" name="vacancy" #vacancy="ngModel" required [(ngModel)]="request.vacancy" required>
+                <select class="custom-select custom-select-lg mb-3" name="vacancy" #vacancy="ngModel" required [(ngModel)]="onlineForm.vacancy" required>
                   <option selected value="">Вибір вакансії</option>
                   <option *ngFor="let vacancy of vacancies"
                           [value]="vacancy">{{vacancy}}
@@ -75,25 +75,34 @@
                   <div *ngIf="vacancy.errors.required">Небхідно вибрати вакансію</div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <input type="email" class="input" [(ngModel)]="request.email" name="email" placeholder="Електронна пошта">
+              <div class="office-select col-md-6 row">
+                <label for="office-select" class="col-sm-4 col-form-label">Контактний офіс:</label>
+                <select class="col-sm-8 custom-select custom-select-lg mb-3" name="office" id="office-select" #office="ngModel" required [(ngModel)]="onlineForm.office" required>
+                  <!--<option selected value="">Вибір контакного офісу</option>-->
+                  <option *ngFor="let office of offices"
+                          [value]="office.value">{{office.title}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <input type="email" class="input" [(ngModel)]="onlineForm.email" name="email" placeholder="Електронна пошта">
                 <div class="alert alert-success">
                   <div>Не обов'язкове поле.</div>
                 </div>
               </div>
               <div class="col-md-12">
-                <textarea class="input" [(ngModel)]="request.description" name="description" placeholder="Коротко про себе (вік, досвід роботи ...)"></textarea>
+                <textarea class="input" [(ngModel)]="onlineForm.description" name="description" placeholder="Коротко про себе (вік, досвід роботи ...)"></textarea>
               </div>
-              <button type="submit" [disabled]="f.invalid" class="main-btn">Надіслати</button>
+              <button type="submit" [disabled]="f.invalid" class="main-btn">{{pageContent.online_form_send_action}}</button>
             </form>
           </div>
-          <p>Відправити скан/фото заповненої анкети:</p>
+          <p>{{pageContent.official_form_info}}</p>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <a target="_blank" href="/assets/Anketa-EIS.pdf" download="Anketa-EIS.pdf" class="btn outline-btn">Скачати анкету</a>
+            <a target="_blank" href="/wp-content/themes/invest/dist/assets/Anketa-EIS.pdf" download="Anketa-EIS.pdf" class="btn outline-btn">{{pageContent.official_form_download}}</a>
             <!--<button type="button" class="btn main-btn">Завантажити анкету</button>-->
             <div class="custom-file">
-              <input type="file" (change)="uploadRequestForm($event.target.files, file)" #file class="custom-file-input" id="validatedCustomFile" required>
-              <label class="custom-file-label" for="validatedCustomFile">Завантажити анкету</label>
+              <input type="file" name="Anketa_EIS" (change)="uploadOfficialForm($event.target.files, file)" #file class="custom-file-input" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="validatedCustomFile">{{pageContent.official_form_upload}}</label>
               <div class="invalid-feedback">Помилка при завантаженні, спробуйте ще раз.</div>
             </div>
           </div>
@@ -125,6 +134,5 @@
   <div *ngIf="uploadFormSuccess" class="alert alert-success alert-top fade" [ngClass]="{show: uploadFormSuccess}" role="alert">
     Анкета успішно завантажена, наші працівники Вам зателефонують.
   </div>
-
 </div>
 <!-- /Contact -->

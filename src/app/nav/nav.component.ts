@@ -55,7 +55,7 @@ export class NavComponent implements OnInit {
   // Smooth scroll
   navigate(event, link) {
     event.preventDefault();
-    Utils.scrollTo(link.hash);
+    Utils.scrollTo(link.hash, this.fixedNav ? 0 : -60);
   }
 
   toggleNav() {

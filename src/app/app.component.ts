@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import * as $ from 'jquery'
+import {StaticTranslations} from "./shared/constants";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,17 @@ import * as $ from 'jquery'
 })
 export class AppComponent implements OnInit {
 
-  constructor( private appService: AppService ) { }
+  activeSection:string;
+
+  constructor( private appService: AppService ) {
+    this.appService.appInfo.subscribe(info => {
+      StaticTranslations.locale = info.languages.current;
+    });
+
+    this.appService.activeSection.subscribe(section => {
+      this.activeSection = section;
+    });
+  }
 
   isBackTop:boolean = false
 

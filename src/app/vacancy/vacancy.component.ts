@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations'
-import { Vacancy } from '../vacancy/vacancy';
+import { VacancyContent } from '../vacancy/vacancy';
 import { VacanciesService } from '../vacancies/vacancies.service';
 import { Utils } from "../shared/index";
 import { environment } from '../../environments/environment';
@@ -48,8 +48,8 @@ var refreshAnimation = animate('700ms ease-in',
 export class VacancyComponent implements OnChanges {
 
   @Input()
-  vacancy:Vacancy;
-  activeVacancy:Vacancy;
+  vacancy:VacancyContent;
+  activeVacancy:VacancyContent;
 
   private options:Object = {
     items:1,
@@ -76,15 +76,15 @@ export class VacancyComponent implements OnChanges {
       }
 
       setTimeout(() => {
-        this.activeVacancy = name.currentValue
+        this.activeVacancy = name.currentValue;
       }, 4e2)
     } else if (name.currentValue) {
-      this.activeVacancy = name.currentValue
+      this.activeVacancy = name.currentValue;
       this.state = 'open'
     }
   }
 
-  requestVacancy(vacancy: Vacancy) {
+  requestVacancy(vacancy: VacancyContent) {
     this.vacanciesService.requestVacancy(vacancy);
     Utils.scrollTo('request-form');
   }

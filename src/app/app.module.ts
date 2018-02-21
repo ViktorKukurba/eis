@@ -23,6 +23,7 @@ import { VacanciesService } from './vacancies/vacancies.service'
 import { WpService } from './wp.service'
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { AgmCoreModule } from '@agm/core';
+import { TranslateDirective } from './translate.directive';
 
 
 // Provide window object for browser and a suitable replacement
@@ -42,7 +43,8 @@ const providers = [
     AboutComponent,
     VacanciesComponent,
     ContactComponent,
-    VacancyComponent
+    VacancyComponent,
+    TranslateDirective
   ],
   imports: [
     BrowserModule,

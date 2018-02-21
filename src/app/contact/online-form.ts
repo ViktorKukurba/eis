@@ -1,21 +1,24 @@
-export interface Request {
+export interface OnlineForm {
     name: string;
     email: string;
     phone: string;
     description: string;
     vacancy: string;
+    office: string;
 }
 
-const emptyRequest:Request = {
+const emptyRequest:OnlineForm = {
     name: '',
     email: '',
     phone: '',
     description: '',
-    vacancy: ''
+    vacancy: '',
+    office: ''
 }
 
-const getEmptyRequest = () => {
+const getEmptyOnlineForm = () => {
     return Object.assign({}, emptyRequest);
 }
 
-export {getEmptyRequest}
+export {getEmptyOnlineForm}
+

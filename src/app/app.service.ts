@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject"
+import { Subject } from "rxjs/Subject"
 import { environment } from '../environments/environment';
 import * as $ from 'jquery'
 import {Utils} from "./shared/index";
@@ -16,7 +17,7 @@ export class AppService {
   private activeSection_ = new BehaviorSubject<string>(undefined);
   private windowScroll_ = new BehaviorSubject<number>(undefined);
   private links_ = new BehaviorSubject<Page[]>(undefined);
-  private appInfo_ = new BehaviorSubject<any>(undefined);
+  private appInfo_ = new Subject<any>();
   private handler_:any = this.scrollHandler.bind(this);
 
   activeSection = this.activeSection_.asObservable();

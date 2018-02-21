@@ -1,6 +1,6 @@
 {
-  "name": "wpng2",
-  "version": "0.1.0",
+  "name": "eis-theme",
+  "version": "0.2.5",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -10,8 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --target=production",
-    "build_to_wp": "ng build --aot --prod --deploy-url=\"wp-content/themes/invest/dist/\" && node scripts/copy_to_wp.js",
+    "postinstall": "ng build --aot --dev",
+    "build_to_wp": "ng build --dev --target=development --deploy-url=\"wp-content/themes/invest/dist/\" && node scripts/copy_to_wp.js",
     "copy_to_wp": "node scripts/copy_to_wp.js"
   },
   "dependencies": {
@@ -49,6 +49,7 @@
     "codelyzer": "~3.1.2",
     "jasmine-core": "~2.6.4",
     "jasmine-spec-reporter": "~4.1.1",
+    "jsdom": "^11.5.1",
     "karma": "~1.7.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-cli": "~1.0.1",

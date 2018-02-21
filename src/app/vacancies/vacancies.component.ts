@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { VacanciesService } from './vacancies.service'
-import { Vacancy } from '../vacancy/vacancy'
+import { VacancyContent} from '../vacancy/vacancy'
 import { AppService } from '../app.service'
 
 import {Utils, DefaultContent} from '../shared'
 import {WpService} from "../wp.service";
 import {Pages} from "../shared/constants";
+import "rxjs/add/operator/map"
 
 @Component({
   selector: 'app-vacancies',
@@ -14,7 +15,7 @@ import {Pages} from "../shared/constants";
 })
 export class VacanciesComponent implements OnInit {
 
-  public vacancies:Array<Vacancy>;
+  public wpVacancies:Array<VacancyContent>;
 
   active:Object;
   pageContent:DefaultContent = new DefaultContent()
@@ -29,15 +30,17 @@ export class VacanciesComponent implements OnInit {
       if (Utils.isMobile()) {
         Utils.scrollTo('vacancy-details');
       } else {
-        Utils.scrollTo(Pages.VACANCIES);
+        Utils.scrollTo('vacancy-details');
+        // Utils.scrollTo(Pages.VACANCIES);
       }
     }, 1e1)
   }
 
   ngOnInit() {
-    this.vacanciesService.getVacancies().subscribe(vacancies => {
-      this.vacancies = vacancies
+    this.vacanciesService.vacancies.subscribe(vacancies => {
+      this.wpVacancies = vacancies;
     });
+
     this.appService.activeSection.subscribe(section => {
       if (![Pages.VACANCIES, Pages.CONTACT].includes(section)) {
         this.active = undefined;

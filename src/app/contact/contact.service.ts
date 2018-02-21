@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../environments/environment';
 import { Contact } from './contact'
-import { Request } from './request'
+import { OnlineForm } from './online-form'
 import 'rxjs/add/operator/catch';
 import {WpService} from "../wp.service";
 import {Pages} from "../shared/constants";
@@ -12,7 +12,7 @@ import {Pages} from "../shared/constants";
 @Injectable()
 export class ContactService {
   private CONTACT_POST_URL =  environment.wpSite + 'wp-admin/admin-ajax.php?action=send_message';
-  private REQUEST_FORM_POST_URL =  environment.wpSite + 'wp-admin/admin-ajax.php?action=send_file';
+  private ONLINE_FORM_POST_URL =  environment.wpSite + 'wp-admin/admin-ajax.php?action=send_order';
   private CONTACTS_URL = environment.wpDist + 'assets/data/contacts.json';
 
   private activeContact_ = new BehaviorSubject<Contact>(undefined);
@@ -39,6 +39,8 @@ export class ContactService {
     }) : [];
     return <Contact>{
       city: `${(<any>contact).country} ${(<any>contact).city}`,
+      street: contact.street,
+      email: contact.email,
       phones: (<any>contact).vibers.split(',').map(viber => {
         return {
           number: viber.trim(),
@@ -56,20 +58,21 @@ export class ContactService {
     return Observable.throw(new Error(error.error));
   }
 
-  sendEmail(req: Request): Observable<any> {
+  sendEmail(form: OnlineForm): Observable<any> {
     const formData = new FormData();
-    formData.append('message', req.description);
-    formData.append('email', req.email);
-    formData.append('vacancy', req.vacancy);
-    formData.append('phone', req.phone);
-    formData.append('name', req.name);
+    formData.append('message', form.description);
+    formData.append('email', form.email);
+    formData.append('vacancy', form.vacancy);
+    formData.append('phone', form.phone);
+    formData.append('name', form.name);
+    formData.append('office', form.office);
     return this.http.post(this.CONTACT_POST_URL, formData).catch(this.handleError);
   }
 
   sendFile(fileToUpload: File): Observable<{success:boolean}> {
     const formData: FormData = new FormData();
-    formData.append('requestForm', fileToUpload, fileToUpload.name);
-    return this.http.post(this.REQUEST_FORM_POST_URL, formData).catch(this.handleError);
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(this.ONLINE_FORM_POST_URL, formData).catch(this.handleError);
   }
 
   getContacts(): Observable<Contact[]> {
