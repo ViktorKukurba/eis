@@ -21,11 +21,10 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "css/styles.css",
-        "css/ei-style.css",
-        "css/font-awesome.min.css",
-        "css/owl.carousel.css",
-        "css/owl.theme.default.css"
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/owl.carousel/dist/assets/owl.carousel.css",
+        "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
+        "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",

@@ -65,7 +65,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <select class="custom-select custom-select-lg mb-3" name="vacancy" #vacancy="ngModel" required [(ngModel)]="onlineForm.vacancy" required>
+                <select class="custom-select mb-3" name="vacancy" #vacancy="ngModel" required [(ngModel)]="onlineForm.vacancy" required>
                   <option selected value="">Вибір вакансії</option>
                   <option *ngFor="let vacancy of vacancies"
                           [value]="vacancy">{{vacancy}}
@@ -77,7 +77,7 @@
               </div>
               <div class="office-select col-md-6 row">
                 <label for="office-select" class="col-sm-4 col-form-label">Контактний офіс:</label>
-                <select class="col-sm-8 custom-select custom-select-lg mb-3" name="office" id="office-select" #office="ngModel" required [(ngModel)]="onlineForm.office" required>
+                <select class="col-sm-8 custom-select mb-3" name="office" id="office-select" #office="ngModel" required [(ngModel)]="onlineForm.office" required>
                   <!--<option selected value="">Вибір контакного офісу</option>-->
                   <option *ngFor="let office of offices"
                           [value]="office.value">{{office.title}}

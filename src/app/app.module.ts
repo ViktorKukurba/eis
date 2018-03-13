@@ -6,9 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { OwlModule } from 'ngx-owl-carousel';
 
 import { AppComponent } from './app.component';
-import { PostListComponent } from './posts/post-list/post-list.component';
-import { Wpng2RoutingModule } from './app-routing.module';
-import { PostSingleComponent } from './posts/post-single/post-single.component';
 import { NavComponent } from './nav/nav.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -36,8 +33,6 @@ const providers = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostListComponent,
-    PostSingleComponent,
     NavComponent,
     HomeComponent,
     AboutComponent,
@@ -50,7 +45,6 @@ const providers = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    Wpng2RoutingModule,
     InViewportModule.forRoot(providers),
     ScrollSpyModule.forRoot(),
     OwlModule,
