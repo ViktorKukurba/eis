@@ -3,9 +3,9 @@
   "version": "0.3.0",
   "license": "MIT",
   "author": {
-    "name" : "Viktor Kukurba",
-    "email" : "viktor.kukurba@gmail.com",
-    "url" : "https://viktorkukurba.github.io"
+    "name": "Viktor Kukurba",
+    "email": "viktor.kukurba@gmail.com",
+    "url": "https://viktorkukurba.github.io"
   },
   "angular-cli": {},
   "scripts": {

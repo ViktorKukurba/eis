@@ -27,4 +27,6 @@ export class ContactPageContent {
     search_button: string;
     site_title: string;
     sub_title: string;
+    vk_link: string;
+    vk_label: string;
 }

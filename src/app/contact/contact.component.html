@@ -34,10 +34,17 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-md-12">
-        <div class="contact">
-          <i class="fa fa-envelope"></i>
-          <h3>{{pageContent.email_label}}</h3>
-          <p><a href="mailto:{{pageContent.contact_email}}">{{pageContent.contact_email}}</a></p>
+        <div class="row contact-list">
+          <div class="contact-item">
+            <i class="fa fa-envelope"></i>
+            <h3>{{pageContent.email_label}}</h3>
+            <p><a href="mailto:{{pageContent.contact_email}}">{{pageContent.contact_email}}</a></p>
+          </div>
+          <div class="contact-item">
+            <i class="fa fa-vk"></i>
+            <h3>{{pageContent.vk_label}}</h3>
+            <p><a href="{{pageContent.vk_link}}">{{pageContent.vk_link}}</a></p>
+          </div>
         </div>
       </div>
     </div>

@@ -232,6 +232,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 }
 
 .custom-file > input {
+  cursor: pointer;
   height: 3em;
   width: 12em;
   min-width: auto;
