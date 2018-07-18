@@ -16,7 +16,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot --dev",
-    "build_to_wp": "ng build --dev --target=development --deploy-url=\"wp-content/themes/invest/dist/\" && node scripts/copy_to_wp.js",
+    "build_to_wp": "ng build --prod --target=production --deploy-url=\"wp-content/themes/invest/dist/\" && node scripts/copy_to_wp.js",
     "copy_to_wp": "node scripts/copy_to_wp.js"
   },
   "dependencies": {
