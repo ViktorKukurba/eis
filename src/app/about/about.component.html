@@ -4,37 +4,22 @@
   <!-- Container -->
   <div class="container">
 
-    <!-- Row -->
+    <!-- Section header -->
     <div class="section-header text-center">
       <h2 class="title">{{pageContent.title.rendered}}</h2>
     </div>
+    <!-- /Section header -->
+    <!-- Row -->
     <div class="row sections">
-
-      <!-- Section header -->
-      <!-- /Section header -->
-
       <!-- about -->
       <div class="col-md-4 section" *ngFor="let section of pageSections">
-        <div class="about">
-          <i class="fa {{section.icon}}"></i>
+        <div class="about text-center h-100 p-3 my-2">
+          <i class="fa {{section.icon}} mb-3"></i>
           <h3>{{section.title}}</h3>
-          <p [innerHTML]="section.text"></p>
+          <p class="text-justify mb-0" [innerHTML]="section.text"></p>
         </div>
       </div>
       <!-- /about -->
-
-      <!-- about -->
-      <!--<div class="col-md-6 section">-->
-        <!--<div class="about">-->
-          <!--<i class="fa fa-briefcase"></i>-->
-          <!--<h3>{{pageContent.second_section_title}}</h3>-->
-          <!--<p>{{pageContent.second_section_text}}</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!-- /about -->
-
-      <div></div>
-
     </div>
     <!-- /Row -->
 

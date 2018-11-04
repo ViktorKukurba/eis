@@ -46,7 +46,7 @@ export class StaticTranslations {
         }
     }
 
-    private static locale_:string = 'ua';
+    private static locale_ = 'ua';
 
 
     static set locale(locale) {
@@ -58,7 +58,7 @@ export class StaticTranslations {
     }
 
     static translate(key) {
-        var language = this.MAP[this.locale_];
+        const language = this.MAP[this.locale_];
         if (language.hasOwnProperty(key)) {
             return language[key];
         }

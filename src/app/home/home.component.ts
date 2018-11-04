@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ContactService } from '../contact/contact.service'
-import { AppService } from '../app.service'
-import { WpService } from '../wp.service'
-import { Utils } from '../shared'
-import { Pages } from "../shared/constants";
+import { ContactService } from '../contact/contact.service';
+import { AppService } from '../app.service';
+import { WpService } from '../wp.service';
+import { Utils } from '../shared';
+import { Pages } from '../shared/constants';
+
+export class HomePageContent {
+  site_title: string;
+  sub_title: string;
+  action_button: string;
+  search_button: string;
+  phone_number: string;
+  secondary_phone_number: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -13,7 +22,7 @@ import { Pages } from "../shared/constants";
 })
 export class HomeComponent implements OnInit {
 
-  pageContent:HomePageContent = new HomePageContent();
+  pageContent: HomePageContent = new HomePageContent();
 
   constructor(private contactService: ContactService,
               private appService: AppService,
@@ -24,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.wpService.getPageBySlug(Pages.HOME).subscribe((page:{acf: HomePageContent}) => {
+    this.wpService.getPageBySlug(Pages.HOME).subscribe((page: {acf: HomePageContent}) => {
       this.pageContent = page.acf;
     });
     // this.wpService.pages.subscribe(pages => {
@@ -63,13 +72,4 @@ export class HomeComponent implements OnInit {
     this.contactService.setActiveContact(contact);
     Utils.scrollTo('contact');
   }
-}
-
-export class HomePageContent {
-  site_title: string;
-  sub_title: string;
-  action_button:string;
-  search_button:string;
-  phone_number:string;
-  secondary_phone_number:string;
 }

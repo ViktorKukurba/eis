@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import * as $ from 'jquery'
-import {StaticTranslations} from "./shared/constants";
+import {StaticTranslations} from './shared/constants';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +10,15 @@ import {StaticTranslations} from "./shared/constants";
   providers: [AppService]
 })
 export class AppComponent implements OnInit {
-
-  activeSection:string;
-
-  constructor( private appService: AppService ) {
+  isBackTop = false;
+  constructor(private appService: AppService) {
     this.appService.appInfo.subscribe(info => {
       StaticTranslations.locale = info.languages.current;
     });
-
-    this.appService.activeSection.subscribe(section => {
-      this.activeSection = section;
-    });
   }
 
-  isBackTop:boolean = false
-
   ngOnInit() {
-    $("#preloader").delay(600).fadeOut();
+    $('#preloader').delay(600).fadeOut();
     this.appService.windowScroll.subscribe(position => {
       this.isBackTop = position > 700;
     });

@@ -1,22 +1,6 @@
 @import "../app.vars.scss";
-
-.section {
-  p {
-    text-align: justify;
-    margin-bottom: 0;
-  }
-
-  ul {
-    text-align: left;
-    column-count: 2;
-    li {
-      padding-left: 1em;
-    }
-  }
-}
-
 .sections .section:nth-child(3) p {
-  text-align: center;
+  text-align: center !important;
 }
 
 /*------------------------------------*\
@@ -25,16 +9,11 @@
 
 .about {
   position: relative;
-  text-align: center;
-  padding: 1em;
   border: 1px solid #EEE;
-  margin: 15px 0px;
-  height: 100%;
 
   i {
     font-size: 36px;
     color: $--color;
-    margin-bottom: 20px;
   }
 
   :after {

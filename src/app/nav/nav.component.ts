@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
 import { AppService } from '../app.service';
 import { Utils } from '../shared'
-import { WpService} from "../wp.service";
-import {HomePageContent} from "../home/home.component";
-import {Pages} from "../shared/constants";
+import { WpService} from '../wp.service';
+import {HomePageContent} from '../home/home.component';
+import {Pages} from '../shared/constants';
 
 @Component({
   selector: 'app-nav',
@@ -12,14 +12,14 @@ import {Pages} from "../shared/constants";
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  links:Object[] = [];
-  languages:Array<string> = [];
-  activeSection:string;
-  currentLanguage:string;
+  links: Object[] = [];
+  languages: Array<string> = [];
+  activeSection: string;
+  currentLanguage: string;
   fixedNav: boolean;
-  phones:Array<string> = [];
+  phones: Array<string> = [];
 
-  constructor(private appService:AppService, private wpService:WpService) { }
+  constructor(private appService: AppService, private wpService: WpService) { }
 
   ngOnInit() {
     ///////////////////////////
@@ -47,7 +47,7 @@ export class NavComponent implements OnInit {
       }
     });
 
-    this.wpService.getPageBySlug(Pages.HOME).subscribe((page:{acf: HomePageContent}) => {
+    this.wpService.getPageBySlug(Pages.HOME).subscribe((page: {acf: HomePageContent}) => {
       this.phones = [page.acf.phone_number, page.acf.secondary_phone_number];
     });
   }

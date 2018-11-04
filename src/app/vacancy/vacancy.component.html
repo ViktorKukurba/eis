@@ -1,7 +1,7 @@
 <!-- Vacancy -->
 <div id="vacancy-details">
   <!-- Container -->
-  <div class="container" [@myAwesomeAnimation]='state'>
+  <div class="container" [@showVacancy]='state'>
     <div class="row" *ngIf="activeVacancy">
       <!-- Vacancy slider -->
       <div class="col-md-6">
@@ -22,10 +22,6 @@
           <i class="fa fa-check"></i>
           <p><span appTranslate>gender</span>: {{activeVacancy.genderTranslated}} <span appTranslate>age</span>: {{activeVacancy.age}}</p>
         </div>
-        <!--<div class="vacancy-info-block">-->
-        <!--<i class="fa fa-check"></i>-->
-        <!--<p>-->
-        <!--</div>-->
         <div class="vacancy-info-block">
           <i class="fa fa-check"></i>
           <p><span appTranslate>qualification</span>: {{activeVacancy.experience}} {{activeVacancy.language}}</p>
@@ -60,10 +56,7 @@
         <button type="button" (click)="requestVacancy(activeVacancy)" class="btn main-btn" appTranslate>Apply</button>
       </div>
     </div>
-
-
   </div>
   <!-- /Container -->
-
 </div>
 <!-- /Why Choose Us -->

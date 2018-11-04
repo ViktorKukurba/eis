@@ -55,7 +55,7 @@
           <h2 class="title">{{pageContent.request_label}}</h2>
           <p>{{pageContent.online_form_info}}</p>
           <button type="button" (click)="formActive = !formActive" class="btn main-btn">{{pageContent.online_form_open_action}}</button>
-          <div class="col-md-8" [@myAwesomeAnimation]='formState' class="contact-form">
+          <div class="col-md-8" [@contactForm]='formState' class="contact-form">
             <form (ngSubmit)="sendForm(f)" #f="ngForm" class="row justify-content-around">
               <div class="col-md-6">
                 <input type="text" class="input" [(ngModel)]="onlineForm.name" [ngModelOptions]="{updateOn: 'blur'}" name="name" #name="ngModel" required minlength="4" placeholder="Прізвище Ім'я Побатькові">

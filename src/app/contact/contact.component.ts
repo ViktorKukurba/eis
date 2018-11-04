@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, style, animate, state, keyframes } from '@angular/animations';
-import { ContactService } from "./contact.service";
-import { VacanciesService } from '../vacancies/vacancies.service'
+import { ContactService } from './contact.service';
+import { VacanciesService } from '../vacancies/vacancies.service';
 import { Contact, ContactPageContent } from './contact';
 import { OnlineForm, getEmptyOnlineForm } from './online-form';
-import { VacancyContent} from "../vacancy/vacancy";
-import { Utils } from "../shared/index";
-import { WpService } from "../wp.service";
-import { Pages } from "../shared/constants";
+import { VacancyContent} from '../vacancy/vacancy';
+import { Utils } from '../shared/index';
+import { WpService } from '../wp.service';
+import { Pages } from '../shared/constants';
+import { contactForm, showMap } from './contact.animation';
 
 // function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 //   var R = 6371; // Radius of the earth in km
@@ -31,60 +31,18 @@ import { Pages } from "../shared/constants";
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  animations: [
-    trigger('myAwesomeAnimation', [
-      state('show', style({
-        'max-height': '100%'
-      })),
-      state('hide', style({
-        'max-height': '0',
-        border: 'none'
-      })),
-      transition('show => hide', animate('500ms ease-in',
-          keyframes([
-            style({'height': '0', offset: 0.5}),
-            style({'height': '0', offset: 1.0})
-          ])
-      )),
-      transition('hide => show', animate('500ms ease-in',
-          keyframes([
-            style({'max-height': '20em', offset: 0.5}),
-            style({'max-height': '100%', offset: 1.0})
-          ])
-      )),
-    ]),
-    trigger('showMap', [
-      state('show', style({
-        'max-height': '100%'
-      })),
-      state('hide', style({
-        'max-height': '0'
-      })),
-      transition('show => hide', animate('500ms ease-in',
-          keyframes([
-            style({'height': '0', offset: 0.5}),
-            style({'height': '0', offset: 1.0})
-          ])
-      )),
-      transition('hide => show', animate('500ms ease-in',
-          keyframes([
-            style({'max-height': '20em', offset: 0.5}),
-            style({'max-height': '100%', offset: 1.0})
-          ])
-      )),
-    ]),
-  ]
+  animations: [contactForm, showMap]
 })
 export class ContactComponent implements OnInit {
 
   public contacts: Contact[] = []
 
   onlineForm: OnlineForm = getEmptyOnlineForm();
-  formActive: boolean = false;
-  sendFormError: boolean = false;
-  sendFormSuccess: boolean = false;
-  uploadFormSuccess: boolean = false;
-  uploadFormError: boolean = false;
+  formActive = false;
+  sendFormError = false;
+  sendFormSuccess = false;
+  uploadFormSuccess = false;
+  uploadFormError = false;
   fileToUpload: File;
 
   vacancies: string[] = [];
@@ -120,8 +78,9 @@ export class ContactComponent implements OnInit {
             }
           });
 
-      if (!this.offices.length) return
-      this.onlineForm.office = this.offices.filter(office => office.value.includes('lviv'))[0].value
+      if (this.offices.length) {
+        this.onlineForm.office = this.offices.filter(office => office.value.includes('lviv'))[0].value;
+      }
 
       // navigator.geolocation.getCurrentPosition((geolocation) => {
       //   this.offices.sort((a, b) => {
@@ -155,7 +114,7 @@ export class ContactComponent implements OnInit {
       }
     });
 
-    this.wpService.getPageBySlug(Pages.CONTACT).subscribe((page:any) => {
+    this.wpService.getPageBySlug(Pages.CONTACT).subscribe((page: any) => {
       this.pageContent = <ContactPageContent>page.acf;
       this.pageContent.title = page.title.rendered;
     })

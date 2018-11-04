@@ -8,9 +8,9 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
-import { ScrollSpyModule } from '@thisissoon/angular-scrollspy';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { InViewportModule } from '@thisissoon/angular-inviewport';
+// import { ScrollSpyModule } from '@thisissoon/angular-scrollspy';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
@@ -21,14 +21,6 @@ import { WpService } from './wp.service'
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { AgmCoreModule } from '@agm/core';
 import { TranslateDirective } from './translate.directive';
-
-
-// Provide window object for browser and a suitable replacement
-// on other platforms
-const getWindow = () => window;
-const providers = [
-  { provide: WindowRef, useFactory: (getWindow) },
-];
 
 @NgModule({
   declarations: [
@@ -45,8 +37,8 @@ const providers = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    InViewportModule.forRoot(providers),
-    ScrollSpyModule.forRoot(),
+    // InViewportModule,
+    // ScrollSpyModule.forRoot(),
     OwlModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({

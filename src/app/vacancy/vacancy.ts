@@ -19,17 +19,17 @@ export class Vacancy {
 export class VacancyContent {
     additional: string;
     age: string;
-    conditions:string;
-    duties:string;
-    employment:string;
-    experience:string;
-    gender:string;
-    language:string;
-    location:string;
-    payment:string;
-    residence:string;
-    schedule:string
-    title:string;
+    conditions: string;
+    duties: string;
+    employment: string;
+    experience: string;
+    gender: string;
+    language: string;
+    location: string;
+    payment: string;
+    residence: string;
+    schedule: string
+    title: string;
     genderTranslated: string;
     images: Array<string>;
 }

@@ -13,14 +13,14 @@ export class Contact {
 }
 
 export class ContactPageContent {
-    title:string;
+    title: string;
     action_button: string;
     contact_email: string;
     email_label: string;
     official_form_download: string;
     official_form_info: string;
     official_form_upload: string;
-    online_form_info :string;
+    online_form_info: string;
     online_form_open_action: string;
     online_form_send_action: string;
     request_label: string;

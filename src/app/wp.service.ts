@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs/BehaviorSubject"
-import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject ,  Observable, from } from 'rxjs';
 import { environment } from '../environments/environment';
-import 'rxjs/add/observable/fromPromise';
 
 @Injectable()
 export class WpService {
-
   pages_ = new BehaviorSubject([]);
   categories_ = new BehaviorSubject([]);
   pages = this.pages_.asObservable();
@@ -26,11 +23,11 @@ export class WpService {
     });
   }
 
-  getPageBySlug(slug) {
-    return Observable.fromPromise(new Promise((resolve) => {
-      var subscription = this.pages.subscribe(pages => {
+  getPageBySlug(slug: string) {
+    return from(new Promise((resolve) => {
+      const subscription = this.pages.subscribe(pages => {
         if (pages && pages.length) {
-          let page = pages.find(page => page.slug === slug);
+          const page = pages.find(p => p.slug === slug);
           if (page) {
             return resolve(page);
           } else {
@@ -42,11 +39,11 @@ export class WpService {
     }));
   }
 
-  getPostsByCategorySlug(categorySlug) {
-    return Observable.fromPromise(new Promise((resolve) => {
+  getPostsByCategorySlug(categorySlug: string) {
+    return from(new Promise((resolve) => {
       this.categories_.subscribe(categories => {
         if (categories && categories.length) {
-          let contactCategory = categories.find(c => c.slug === categorySlug);
+          const contactCategory = categories.find(c => c.slug === categorySlug);
           if (contactCategory) {
             this.getPostsByCategoryId(contactCategory.id).subscribe(posts => {
               resolve(posts);

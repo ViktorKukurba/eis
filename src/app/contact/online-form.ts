@@ -7,7 +7,7 @@ export interface OnlineForm {
     office: string;
 }
 
-const emptyRequest:OnlineForm = {
+const emptyRequest: OnlineForm = {
     name: '',
     email: '',
     phone: '',

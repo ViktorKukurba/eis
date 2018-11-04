@@ -1,8 +1,13 @@
+<!-- Navigation -->
 <app-nav></app-nav>
-<app-home class="app-section" [ngClass]="{active: activeSection === 'home'}"></app-home>
-<app-about class="app-section" [ngClass]="{active: activeSection === 'about'}"></app-about>
-<app-vacancies class="app-section" [ngClass]="{active: activeSection === 'vacancies'}"></app-vacancies>
-<app-contact class="app-section" [ngClass]="{active: activeSection === 'contact'}"></app-contact>
+<!-- /Navigation -->
+
+<!-- Sections -->
+<app-home class="app-section" [ngClass]="{active: (appService.activeSection | async) === 'home'}"></app-home>
+<app-about class="app-section" [ngClass]="{active: (appService.activeSection | async) === 'about'}"></app-about>
+<app-vacancies class="app-section" [ngClass]="{active: (appService.activeSection | async) === 'vacancies'}"></app-vacancies>
+<app-contact class="app-section" [ngClass]="{active: (appService.activeSection | async) === 'contact'}"></app-contact>
+<!-- /Sections -->
 
 <!-- Footer -->
 <footer id="footer" class="bg-dark">
@@ -20,17 +25,6 @@
           <a href="javascript:void(0)"></a>
         </div>
         <!-- /footer logo -->
-
-        <!-- footer follow -->
-        <!--<ul class="footer-follow">-->
-          <!--<li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
-          <!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
-          <!--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>-->
-          <!--<li><a href="#"><i class="fa fa-instagram"></i></a></li>-->
-          <!--<li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
-          <!--<li><a href="#"><i class="fa fa-youtube"></i></a></li>-->
-        <!--</ul>-->
-        <!-- /footer follow -->
 
         <!-- footer copyright -->
         <div class="footer-copyright">

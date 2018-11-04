@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {WpService} from "../wp.service";
-import {DefaultContent} from "../shared/index";
-import {Pages} from "../shared/constants";
+import { WpService } from '../wp.service';
+import { DefaultContent } from '../shared/index';
+import { Pages } from '../shared/constants';
+
+
+class AboutContent extends DefaultContent {
+  activities_title: string;
+  activities_text: string;
+  conditions_title: string;
+  conditions_text: string;
+  license_title: string;
+  license_text: string;
+}
 
 @Component({
   selector: 'app-about',
@@ -9,13 +19,13 @@ import {Pages} from "../shared/constants";
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
-  pageContent:AboutContent = new AboutContent();
-  pageSections:Object[] = []
+  pageContent: AboutContent = new AboutContent();
+  pageSections: Object[] = []
 
   constructor(private wpService: WpService) {}
 
   ngOnInit() {
-    this.wpService.getPageBySlug(Pages.ABOUT).subscribe((page:any) => {
+    this.wpService.getPageBySlug(Pages.ABOUT).subscribe((page: any) => {
       this.pageContent = page.acf;
       this.pageContent.title = page.title;
       this.pageSections = [{
@@ -30,17 +40,8 @@ export class AboutComponent implements OnInit {
         title: this.pageContent.license_title,
         text: this.pageContent.license_text,
         icon: 'fa-briefcase'
-      }]
+      }];
     })
   }
 
-}
-
-class AboutContent extends DefaultContent {
-  activities_title: string;
-  activities_text: string;
-  conditions_title: string;
-  conditions_text: string;
-  license_title: string;
-  license_text: string;
 }

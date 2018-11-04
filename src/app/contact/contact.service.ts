@@ -1,13 +1,14 @@
+
+import { throwError as observableThrowError, Observable, BehaviorSubject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Contact } from './contact'
 import { OnlineForm } from './online-form'
-import 'rxjs/add/operator/catch';
-import {WpService} from "../wp.service";
-import {Pages} from "../shared/constants";
+
+import {WpService} from '../wp.service';
+import {Pages} from '../shared/constants';
 
 @Injectable()
 export class ContactService {
@@ -15,26 +16,23 @@ export class ContactService {
   private ONLINE_FORM_POST_URL =  environment.wpSite + 'wp-admin/admin-ajax.php?action=send_order';
   private CONTACTS_URL = environment.wpDist + 'assets/data/contacts.json';
 
-  private activeContact_ = new BehaviorSubject<Contact>(undefined);
-  private contacts_ = new BehaviorSubject<Array<Contact>>([]);
-
-  activeContact = this.activeContact_.asObservable();
-  contacts = this.contacts_.asObservable();
+  activeContact = new BehaviorSubject<Contact>(undefined);
+  contacts = new BehaviorSubject<Array<Contact>>([]);
 
   constructor(public http: HttpClient, private wpService: WpService) {
     this.wpService.categories_.subscribe(categories => {
       if (categories && categories.length) {
-        let contactCategory = categories.find(c => c.slug === Pages.CONTACT);
+        const contactCategory = categories.find(c => c.slug === Pages.CONTACT);
         this.wpService.getPostsByCategoryId(contactCategory.id).subscribe(contacts => {
-          this.contacts_.next(contacts.map(this.formatter));
+          this.contacts.next(contacts.map(this.formatter));
         })
       }
     })
   }
 
-  private formatter(contact):Contact {
+  private formatter(contact): Contact {
     contact = (<any>contact).acf;
-    let phones = (<any>contact).phones ? (<any>contact).phones.split(',').map(number => {
+    const phones = (<any>contact).phones ? (<any>contact).phones.split(',').map(number => {
       return { number, viber: false }
     }) : [];
     return <Contact>{
@@ -55,7 +53,7 @@ export class ContactService {
   private handleError(error: HttpErrorResponse) {
     // simple logging, but you can do a lot more, see below
     console.error('An error occurred:', error.error);
-    return Observable.throw(new Error(error.error));
+    return observableThrowError(new Error(error.error));
   }
 
   sendEmail(form: OnlineForm): Observable<any> {
@@ -66,13 +64,13 @@ export class ContactService {
     formData.append('phone', form.phone);
     formData.append('name', form.name);
     formData.append('office', form.office);
-    return this.http.post(this.CONTACT_POST_URL, formData).catch(this.handleError);
+    return this.http.post(this.CONTACT_POST_URL, formData).pipe(catchError((e) => this.handleError(e)));
   }
 
-  sendFile(fileToUpload: File): Observable<{success:boolean}> {
+  sendFile(fileToUpload: File): Observable<{success?: boolean}> {
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(this.ONLINE_FORM_POST_URL, formData).catch(this.handleError);
+    return this.http.post(this.ONLINE_FORM_POST_URL, formData).pipe(catchError((e) => this.handleError(e)));
   }
 
   getContacts(): Observable<Contact[]> {
@@ -80,9 +78,8 @@ export class ContactService {
   }
 
   setActiveContact(contact) {
-    if (contact !== this.activeContact_.value) {
-      this.activeContact_.next(contact);
+    if (contact !== this.activeContact.value) {
+      this.activeContact.next(contact);
     }
   }
-
 }

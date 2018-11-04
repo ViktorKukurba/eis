@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import { VacanciesService } from './vacancies.service'
 import { VacancyContent} from '../vacancy/vacancy'
 import { AppService } from '../app.service'
-
-import {Utils, DefaultContent} from '../shared'
-import {WpService} from "../wp.service";
-import {Pages} from "../shared/constants";
-import "rxjs/add/operator/map"
+import { Utils, DefaultContent } from '../shared'
+import { WpService } from '../wp.service';
+import { Pages } from '../shared/constants';
 
 @Component({
   selector: 'app-vacancies',
@@ -15,13 +14,12 @@ import "rxjs/add/operator/map"
 })
 export class VacanciesComponent implements OnInit {
 
-  public wpVacancies:Array<VacancyContent>;
-
-  active:Object;
-  pageContent:DefaultContent = new DefaultContent()
+  wpVacancies: Array<VacancyContent>;
+  active: Object;
+  pageContent: DefaultContent = new DefaultContent()
 
   constructor(private vacanciesService: VacanciesService,
-              private appService:AppService,
+              private appService: AppService,
               private wpService: WpService) { }
 
   vacancyDetails(vacancy) {
@@ -46,7 +44,7 @@ export class VacanciesComponent implements OnInit {
         this.active = undefined;
       }
     });
-    this.wpService.getPageBySlug(Pages.VACANCIES).subscribe((page:DefaultContent) => {
+    this.wpService.getPageBySlug(Pages.VACANCIES).subscribe((page: DefaultContent) => {
       this.pageContent = page;
     });
   }

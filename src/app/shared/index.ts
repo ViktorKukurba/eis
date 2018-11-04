@@ -2,9 +2,9 @@ import * as $ from 'jquery'
 import * as MobileDetect from 'mobile-detect';
 
 export class Utils {
-    private static md:MobileDetect = new MobileDetect(window.navigator.userAgent);
+    private static md: MobileDetect = new MobileDetect(window.navigator.userAgent);
     static scrollTo(link, offset = 0) {
-        var elementOffset = $(`#${link}`).offset();
+        const elementOffset = $(`#${link}`).offset();
         if (elementOffset) {
             $('html, body').animate({
                 scrollTop: elementOffset.top + offset
@@ -12,18 +12,20 @@ export class Utils {
         }
     }
 
-    static isElementOnView(element) {
-        if (!element) return false;
-        var top = element.offsetTop;
-        var offset = window.innerHeight * 0.5;
-        var pageTop = window.pageYOffset
+    static isElementOnView(element): boolean {
+        if (!element) {
+            return false;
+        }
+        const top = element.offsetTop;
+        const offset = window.innerHeight * 0.5;
+        const pageTop = window.pageYOffset;
 
         // is Element top position higher page center
-        var elementTop = top < pageTop + offset;
+        const isElementTop = top < pageTop + offset;
         // is Element bottom position not higher page center
-        var elementBottom = top + element.offsetHeight > pageTop + offset;
+        const isElementBottom = top + element.offsetHeight > pageTop + offset;
 
-        return elementTop && elementBottom
+        return isElementTop && isElementBottom;
     }
 
     static isMobile() {
@@ -32,5 +34,5 @@ export class Utils {
 }
 
 export class DefaultContent {
-    title: {rendered:string} = {rendered: ''};
+    title: {rendered: string} = {rendered: ''};
 }
